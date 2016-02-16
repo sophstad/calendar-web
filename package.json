@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/ADI-Labs/calendar-web#readme",
   "dependencies": {
+    "immutable": "^3.7.6",
     "jquery": "^2.2.0",
     "moment": "^2.11.2",
     "normalize.css": "^3.0.3",
