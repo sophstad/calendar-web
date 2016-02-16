@@ -12,8 +12,8 @@ require("es6-promise").polyfill();
 module.exports = {
   resolve: {
     alias: {
-      // "react": "react-lite",
-      // "react-dom": "react-lite"
+      "react": "react-lite",
+      "react-dom": "react-lite"
     },
     root: srcPath,
     extensions: ["", ".js", ".jsx", ".styl"],
@@ -23,8 +23,7 @@ module.exports = {
     commons: [
       "jquery",
       "moment",
-      "react",
-      "react-dom",
+      "react-lite",
       "react-redux",
       "react-router",
       "react-router-redux",
