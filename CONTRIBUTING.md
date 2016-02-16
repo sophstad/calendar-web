@@ -4,7 +4,7 @@ We are open to, and grateful for, any contributions made by the community.  By c
 ## Reporting Issues and Asking Questions
 Before opening an issue, please search the [issue tracker](https://github.com/ADI-Labs/calendar-web/issues) to make sure your issue hasn't already been reported.
 
-Otherise, if you have permission, create a card here on the [waffle board](https://waffle.io/ADI-Labs/calendar-web)
+If you are a member of *Aesthetic*, create a card here on the [waffle board](https://waffle.io/ADI-Labs/calendar-web)
 
 ## Development
 
