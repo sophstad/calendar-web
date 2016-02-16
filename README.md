@@ -17,9 +17,7 @@ $ npm start
 
 This will run the webpack development server. Open `http://localhost:8080`.
 
-### [Development](https://github.com/ADI-Labs/calendar-web/wiki/Getting-Started#making-changes)
-
-### [Deployment](https://github.com/ADI-Labs/calendar-web/wiki/Deployment)
+### [Development](https://github.com/ADI-Labs/calendar-web/wiki/Development)
 
 
 # Architecture
