@@ -12,5 +12,5 @@ if (__DEV__) {
     render(<RedBox error={ e } />, document.getElementById('root'))
   }
 } else {
-  React.render(ROOT, document.getElementById('root'))
+  render(ROOT, document.getElementById('root'))
 }
