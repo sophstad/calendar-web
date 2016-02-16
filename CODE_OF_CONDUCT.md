@@ -1,9 +1,8 @@
 # Contributor Covenant Code of Conduct
 
-##->Our Creed<-
-->Nothing is True<-
-->Everything is Permitted<-
-->We are Aesthetic. Clean. Hot. Tortuous.<-
+## Our Creed
+
+We are Aesthetic. Clean. Hot. Tortuous.
 
 ## Our Pledge
 
