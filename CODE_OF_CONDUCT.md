@@ -1,8 +1,8 @@
 # Contributor Covenant Code of Conduct
 
-## Our Creed
+## The Aesthetic Creed
 
-We are Aesthetic. Clean. Hot. Tortuous.
+Clean. Hot. Tortuous.
 
 ## Our Pledge
 
