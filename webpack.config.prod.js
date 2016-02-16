@@ -35,7 +35,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "dist"),
-    publicPath: "/",
+    publicPath: "",
     filename: "[name]-[hash].js",
   },
   module: {
