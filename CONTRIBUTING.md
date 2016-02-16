@@ -20,12 +20,12 @@ git clone https://github.com/your-username/calendar-web.git
 If you are part of the *Aesthetic* team, the following instructions give you a streamlined development process.
 
 *Make a new branch*. Name your branch the name of your new intended feature, prefixed with your initials and a slash.
-```
+```bash
 $ git checkout -b js/my-new-feature
 ```
 
 Make your changes. `commit` frequently. `git add`'s `-p` option is encouraged (interactive add). Commit messages should be in the imperative present tense.
-```
+```bash
 $ git add -p
 ...
 $ git add ./stuff/morestuff/my-untracked-file
@@ -37,7 +37,7 @@ $ git commit -m "Implement my new WORKING sub-feature-2"
 
 
 When finished, push to a NEW branch on github.
-```
+```bash
 $ git push -u origin js/my-new-feature
 ```
 
@@ -51,7 +51,7 @@ Make a pull request, tag someone in a comment or poke someone on slack for revie
 #### Build Calendar
 
 Running the `build` task will create both a CommonJS module-per-module build and a UMD build.
-```
+```bash
 npm run build
 ```
 
