@@ -24,9 +24,9 @@ If you are part of the *Aesthetic* team, the following instructions give you a s
 $ git checkout -b js/my-new-feature
 ```
 
-Make your changes. `commit` frequently. `git add`'s `-p` option is encouraged (interactive add). Commit messages should be in the imperative present tense.
+Make your changes. `commit` frequently. `git add`'s `-patch` option is encouraged (interactive add). Commit messages should be in the imperative present tense.
 ```bash
-$ git add -p
+$ git add --patch
 ...
 $ git add ./stuff/morestuff/my-untracked-file
 ...
@@ -38,10 +38,12 @@ $ git commit -m "Implement my new WORKING sub-feature-2"
 
 When finished, push to a NEW branch on github.
 ```bash
-$ git push -u origin js/my-new-feature
+$ git push --set-upstream origin js/my-new-feature
 ```
 
 Make a pull request, tag someone in a comment or poke someone on slack for review. Merge and delete branch when done.
+
+>Don't forget to switch back to the master branch on your local machine and delete the old feature-branch when you're finished: `git branch --delete`
 
 
 
