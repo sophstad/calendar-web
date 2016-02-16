@@ -43,7 +43,11 @@ $ git push --set-upstream origin js/my-new-feature
 
 Make a pull request, tag someone in a comment or poke someone on slack for review. Merge and delete branch when done.
 
->Don't forget to switch back to the master branch on your local machine and delete the old feature-branch when you're finished: `git branch --delete`
+>Don't forget to switch back to the master branch on your local machine and delete the old feature-branch when you're finished:
+```bash
+$ git checkout master
+$ git branch --delete js/my-new-feature
+```
 
 
 
