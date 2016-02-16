@@ -5,7 +5,7 @@ import reduxify from 'store/reduxify'
 
 class CounterContainer extends React.Component {
   render() {
-    return(
+    return (
       <Counter
         value={ this.props.counter.value }
         handleIncrement={ this.props.counterActions.increment }

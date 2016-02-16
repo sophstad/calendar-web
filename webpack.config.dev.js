@@ -52,6 +52,10 @@ module.exports = {
     pathInfo: true
   },
   module: {
+    preLoaders: [
+      // set up standard-loader as a preloader 
+      { test: /\.jsx?$/, loader: 'standard', exclude: /(node_modules|bower_components)/ }
+    ],
     loaders: [
       { test: /\.(js|jsx)$/, include: srcPath, loader: "babel" },
       { test: /\.css$/, exclude: /\.useable\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss") },
@@ -62,6 +66,10 @@ module.exports = {
     ]
   },
   // misc plugins
+  standard: {
+    // config options to be passed through to standard e.g.
+    parser: 'babel-eslint'
+  },
   stylus: {
     use: [
       poststylus([
