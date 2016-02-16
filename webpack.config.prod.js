@@ -7,7 +7,7 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 var poststylus = require("poststylus");
 var autoprefixer = require("autoprefixer");
 var srcPath = path.join(__dirname, "src");
-require('es6-promise').polyfill();
+require("es6-promise").polyfill();
 
 module.exports = {
   resolve: {
@@ -44,19 +44,7 @@ module.exports = {
       { test: /\.css$/, exclude: /\.useable\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss") },
       { test: /\.styl$/, loader: ExtractTextPlugin.extract("style", "css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus") },
       { test: /\.json$/, loader: "json" },
-
-      {
-        test: /.*\.(gif|png|jpe?g|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
-        ]
-      },
-
-      { test: /fbsdk/, loader: "exports?FB!script" },
-      { test: /\.(woff|woff2)$/, loader:"url?prefix=font/&limit=5000" },
-      { test: /\.ttf$/, loader: "url?limit=10000" },
-      { test: /\.eot$/, loader: "file?prefix=font/" },
+      { test: /.*\.(gif|png|jpe?g|svg)$/i, loaders: ["file?hash=sha512&digest=hex&name=[hash].[ext]", "image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}"] },
     ]
   },
   // misc plugins
