@@ -52,21 +52,40 @@ module.exports = {
     pathInfo: true
   },
   module: {
-    loaders: [
-      { test: /\.(js|jsx)$/, include: srcPath, loader: "babel" },
-      { test: /\.css$/, loader: "style!css!postcss" },
-      { test: /\.styl$/, loaders: ["style?sourceMap", "css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]!stylus"] },
-      { test: /\.json$/, loader: "json" },
-      { test: /\.png$/, loader: "url" },
-      { test: /\.jpg$/, loader: "file" }
-    ]
+    loaders: [{
+      test: /\.jsx?$/,
+      include: srcPath,
+      loader: "babel"
+    }, {
+      test: /\.css$/,
+      include: path.join(srcPath, "assets/css"),
+      loaders: [
+        "style",
+        "css",
+        "postcss"
+      ]
+    }, {
+      test: /\.styl$/,
+      include: path.join(srcPath, "assets/styles"),
+      loaders: [
+        "style",
+        "css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]",
+        "stylus"
+      ]
+    }, {
+      test: /\.json$/,
+      include: path.join(srcPath, "assets"),
+      loader: "json"
+    }, {
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      include: path.join(srcPath, "assets/images"),
+      loader: "file"
+    }]
   },
   // misc plugins
   stylus: {
     use: [
-      poststylus([
-        "autoprefixer"
-      ])
+      poststylus(["autoprefixer"])
     ]
   },
   postcss: [autoprefixer],

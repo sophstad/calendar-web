@@ -37,13 +37,36 @@ module.exports = {
     filename: "[name]-[hash].js",
   },
   module: {
-    loaders: [
-      { test: /\.(js|jsx)$/, include: srcPath, loader: "babel" },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss") },
-      { test: /\.styl$/, loader: ExtractTextPlugin.extract("style", "css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus") },
-      { test: /\.json$/, loader: "json" },
-      { test: /.*\.(gif|png|jpe?g|svg)$/i, loaders: ["file?hash=sha512&digest=hex&name=[hash].[ext]", "image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: \"65-90\", speed: 4}}"] },
-    ]
+    loaders: [{
+      test: /\.jsx?$/,
+      include: srcPath,
+      loader: "babel"
+    }, {
+      test: /\.css$/,
+      include: path.join(srcPath, "assets/css"),
+      loader: ExtractTextPlugin.extract(
+        "style",
+        "css!postcss"
+      )
+    }, {
+      test: /\.styl$/,
+      include: path.join(srcPath, "assets/styles"),
+      loader: ExtractTextPlugin.extract(
+        "style",
+        "css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus"
+      )
+    }, {
+      test: /\.json$/,
+      include: path.join(srcPath, "assets"),
+      loader: "json"
+    }, {
+      test: /.*\.(gif|png|jpe?g|svg)$/i,
+      include: path.join(srcPath, "assets/images"),
+      loaders: [
+        "file?hash=sha512&digest=hex&name=[hash].[ext]",
+        "image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: \"65-90\", speed: 2, verbose: true}}"
+      ]
+    }]
   },
   // misc plugins
   stylus: {
@@ -84,9 +107,7 @@ module.exports = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
+      compress: { warnings: false }
     })
   ]
 }
