@@ -61,7 +61,7 @@ Running the `build` task will create both a CommonJS module-per-module build and
 npm run build
 ```
 
-To build for production, run `prod:build`.
+To build for production, run `build:prod`.
 ```bash
 npm run build:prod
 ```
