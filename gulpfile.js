@@ -19,7 +19,7 @@ gulp.task("default", ["webpack-dev-server"]);
 // Production build
 gulp.task("build", ["webpack:build"]);
 
-/**
+/*
  * Build. One and done.
  */
 gulp.task("webpack:build", function() {
@@ -34,8 +34,7 @@ gulp.task("webpack:build", function() {
     .pipe(gulp.dest("dist/"));
 });
 
-
-/**
+/*
  * A customized webpack-dev-server setup.
  * Integrates hot-module-reloading.
  */
@@ -52,11 +51,8 @@ gulp.task("webpack-dev-server", function(callback) {
     }
   }));
 
+  // Enables HMR
   app.use(webpackHotMiddleware(compiler));
-
-  // app.get("*", function(req, res) {
-  //   res.sendFile(path.join(__dirname, "index.html"));
-  // });
 
   app.listen(8080, "localhost", function(err) {
     if(err) throw new gutil.PluginError("webpack-dev-server", err);
@@ -66,7 +62,7 @@ gulp.task("webpack-dev-server", function(callback) {
     // keep the server alive or continue?
     // callback();
     console.log("Listening at http://localhost:8080");
-    console.log("Compiling ... Wait for 'bundle is VALID'");
+    console.log("Compiling ... please wait for 'bundle is VALID'");
   });
 });
 
