@@ -12,9 +12,8 @@ export default function configureStore(initialState) {
     reducers,
     initialState,
     compose(
-      applyMiddleware(reduxRouterMiddleware, thunk),
+      applyMiddleware(thunk, reduxRouterMiddleware),
       DevTools.instrument()
-      // window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   )
 
