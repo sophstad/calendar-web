@@ -39,7 +39,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.(js|jsx)$/, include: srcPath, loader: "babel" },
-      { test: /\.css$/, exclude: /\.useable\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss") },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss") },
       { test: /\.styl$/, loader: ExtractTextPlugin.extract("style", "css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus") },
       { test: /\.json$/, loader: "json" },
       { test: /.*\.(gif|png|jpe?g|svg)$/i, loaders: ["file?hash=sha512&digest=hex&name=[hash].[ext]", "image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: \"65-90\", speed: 4}}"] },

@@ -54,7 +54,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.(js|jsx)$/, include: srcPath, loader: "babel" },
-      { test: /\.css$/, exclude: /\.useable\.css$/, loader: "style!css!postcss" },
+      { test: /\.css$/, loader: "style!css!postcss" },
       { test: /\.styl$/, loaders: ["style?sourceMap", "css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]!stylus"] },
       { test: /\.json$/, loader: "json" },
       { test: /\.png$/, loader: "url" },
