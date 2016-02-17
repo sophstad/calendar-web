@@ -89,8 +89,8 @@ npm run lint
 ```
 
 
-###Style
-The [reactjs](https://github.com/reactjs) GitHub org is trying to keep a standard style across its various projects, which can be found over in [eslint-config-reactjs](https://github.com/reactjs/eslint-config-reactjs). If you have a style change proposal, it should first be proposed there. If accepted, we will be happy to accept a PR to implement it here.
+### Style
+The Aesthetic team represents style in all dimensions. Beauty in design, beauty in structure, beauty in precision, beauty in execution. We follow the [standard](http://standardjs.com) form.
 
 ## Submitting Changes
 * Open a new issue in the [Issue tracker](https://github.com/ADI-Labs/calendar-web/issues).
