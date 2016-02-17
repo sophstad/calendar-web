@@ -7,7 +7,6 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 var poststylus = require("poststylus");
 var autoprefixer = require("autoprefixer");
 var srcPath = path.join(__dirname, "src");
-require("es6-promise").polyfill();
 
 module.exports = {
   resolve: {
