@@ -44,7 +44,7 @@ gulp.task("webpack-dev-server", function(callback) {
   // Start a webpack-dev-server
   var compiler = webpack(webpackConfig);
 
-  app.use(require("webpack-dev-middleware")(compiler, {
+  app.use(webpackDevMiddleware(compiler, {
     // server and middleware options
     publicPath: webpackConfig.output.publicPath,
     stats: {
@@ -52,7 +52,7 @@ gulp.task("webpack-dev-server", function(callback) {
     }
   }));
 
-  app.use(require("webpack-hot-middleware")(compiler));
+  app.use(webpackHotMiddleware(compiler));
 
   // app.get("*", function(req, res) {
   //   res.sendFile(path.join(__dirname, "index.html"));
