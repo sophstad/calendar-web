@@ -1,25 +1,23 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import { browserHistory } from 'react-router'
 import { syncHistory } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import promiseMiddleware from 'redux-promise'
 import reducers from 'reducers'
+import DevTools from 'containers/DevTools'
+const reduxRouterMiddleware = syncHistory(browserHistory)
 
-export default function configureStore(history) {
-  const reduxRouterMiddleware = syncHistory(history)
+export default function configureStore(initialState) {
+  const store = createStore(
+    reducers,
+    initialState,
+    compose(
+      applyMiddleware(reduxRouterMiddleware, thunk),
+      DevTools.instrument()
+      // window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+  )
 
-  const finalCreateStore = compose(
-    // Middleware you want to use in development:
-    applyMiddleware(
-      reduxRouterMiddleware,
-      thunk,
-      promiseMiddleware
-    ),
-    // Other store enhancers if you use any
-    // ...
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  )(createStore)
-
-  const store = finalCreateStore(reducers)
   reduxRouterMiddleware.listenForReplays(store)
 
   if (module.hot)

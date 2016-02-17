@@ -35,6 +35,9 @@ module.exports = {
       "react-router",
       "react-router-redux",
       "redux",
+      "redux-devtools",
+      "redux-devtools-dock-monitor",
+      "redux-devtools-log-monitor",
       "redux-thunk",
       "redbox-react"
     ],
