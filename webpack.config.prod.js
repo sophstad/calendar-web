@@ -27,6 +27,8 @@ module.exports = {
       "react-router",
       "react-router-redux",
       "redux",
+      "redux-actions",
+      "redux-promise",
       "redux-thunk"
     ],
     index: path.join(srcPath, "index.js")
