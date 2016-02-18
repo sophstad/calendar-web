@@ -48,10 +48,9 @@ gulp.task("webpack-dev-server", function(callback) {
 
   app.use(webpackDevMiddleware(compiler, {
     // server and middleware options
+    open: true,
     publicPath: webpackConfig.output.publicPath,
-    stats: {
-      colors: true
-    }
+    stats: { colors: true }
   }));
 
   // Enables HMR
@@ -62,7 +61,7 @@ gulp.task("webpack-dev-server", function(callback) {
     req.url = req.baseUrl; // Janky hack... wtf WRITE SOME FUCKING DOCUMENTATION FUCKING CHRIST.
     apiProxy.web(req, res, {
       target: {
-        port: 5000,
+        port: 5000, // TODO put this in config
         host: "localhost"
       }
     });

@@ -17,6 +17,7 @@ module.exports = {
     hot: true,
     inline: true,
     outputPath: path.join(__dirname, "dist"),
+    open: "true"
   },
   resolve: {
     root: srcPath,
