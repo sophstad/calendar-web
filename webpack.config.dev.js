@@ -16,7 +16,7 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     inline: true,
-    outputPath: path.join(__dirname, './dist')
+    outputPath: path.join(__dirname, "./dist"),
   },
   resolve: {
     root: srcPath,
