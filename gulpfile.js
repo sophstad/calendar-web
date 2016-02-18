@@ -37,7 +37,7 @@ gulp.task("webpack:build", function() {
 
 /*
  * A customized webpack-dev-server setup.
- * Integrates hot-module-reloading.
+ * Integrates hot-module-reloading and proxying.
  */
 gulp.task("webpack-dev-server", function(callback) {
   var app = express();
@@ -60,7 +60,7 @@ gulp.task("webpack-dev-server", function(callback) {
   // Proxy api requests
   app.use("*", function(req, res) {
     req.url = req.baseUrl; // Janky hack... wtf WRITE SOME FUCKING DOCUMENTATION FUCKING CHRIST.
-    apiProxy.proxyRequest(req, res, {
+    apiProxy.web(req, res, {
       target: {
         port: 5000,
         host: "localhost"
