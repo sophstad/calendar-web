@@ -2,6 +2,7 @@
 
 var path = require("path");
 var express = require("express");
+var httpProxy = require("http-proxy");
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var webpack = require("webpack");
@@ -40,6 +41,8 @@ gulp.task("webpack:build", function() {
  */
 gulp.task("webpack-dev-server", function(callback) {
   var app = express();
+  var apiProxy = httpProxy.createProxyServer();
+
   // Start a webpack-dev-server
   var compiler = webpack(webpackConfig);
 
@@ -54,6 +57,18 @@ gulp.task("webpack-dev-server", function(callback) {
   // Enables HMR
   app.use(webpackHotMiddleware(compiler));
 
+  // Proxy api requests
+  app.use("*", function(req, res) {
+    req.url = req.baseUrl; // Janky hack... wtf WRITE SOME FUCKING DOCUMENTATION FUCKING CHRIST.
+    apiProxy.proxyRequest(req, res, {
+      target: {
+        port: 5000,
+        host: "localhost"
+      }
+    });
+  });
+
+
   app.listen(8080, "localhost", function(err) {
     if(err) throw new gutil.PluginError("webpack-dev-server", err);
     // Server listening
@@ -62,7 +77,7 @@ gulp.task("webpack-dev-server", function(callback) {
     // keep the server alive or continue?
     // callback();
     console.log("Listening at http://localhost:8080");
-    console.log("Compiling ... please wait for 'bundle is VALID'");
+    console.log("Compiling ... please wait for \"bundle is VALID\"");
   });
 });
 
