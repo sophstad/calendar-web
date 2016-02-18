@@ -3,7 +3,7 @@
 var path = require("path");
 var express = require("express");
 var httpProxy = require("http-proxy");
-var git = require("gulp-git");
+var gitSubtree = require('gulp-gh-pages');
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var webpack = require("webpack");
@@ -86,25 +86,11 @@ gulp.task("webpack-dev-server", function(callback) {
 /*
  * Deployment.
  */
-gulp.task("deploy", ["deploy:commit"], function(callback) {
-  git.exec({args : "subtree push --prefix dist origin production"}, function (err, stdout) {
-    if (err) throw new gutil.PluginError("deployment", err);
-  });
+gulp.task("deploy", function() {
+  return gulp.src('./dist/**/*')
+    .pipe(gitSubtree({
+      branch: "production"
+    }));
 });
-
-// Run git add
-// src is the file(s) to add (or ./*)
-gulp.task("deploy:add", function() {
-  return gulp.src("./dist/*")
-    .pipe(git.add());
-});
-
-// Run git commit
-// src are the files to commit (or ./*)
-gulp.task("deploy:commit", function() {
-  return gulp.src("./dist/*")
-    .pipe(git.commit("initial commit"));
-});
-
 
 

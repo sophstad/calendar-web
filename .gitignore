@@ -37,3 +37,7 @@ dist
 
 # .DS_Store
 .DS_Store
+
+# gulp-gh-pages
+.publish
+
