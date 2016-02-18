@@ -3,7 +3,7 @@
 var path = require("path");
 var express = require("express");
 var httpProxy = require("http-proxy");
-var git = require('gulp-git');
+var git = require("gulp-git");
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var webpack = require("webpack");
@@ -20,6 +20,7 @@ gulp.task("default", ["webpack-dev-server"]);
 
 // Production build
 gulp.task("build", ["webpack:build"]);
+
 
 /*
  * Build. One and done.
@@ -82,9 +83,28 @@ gulp.task("webpack-dev-server", function(callback) {
 });
 
 
-gulp.task("deploy", function(callback) {
-  git.exec({args : 'subtree push --prefix dist origin production'}, function (err, stdout) {
+/*
+ * Deployment.
+ */
+gulp.task("deploy", ["deploy:commit"], function(callback) {
+  git.exec({args : "subtree push --prefix dist origin production"}, function (err, stdout) {
     if (err) throw new gutil.PluginError("deployment", err);
   });
 });
+
+// Run git add
+// src is the file(s) to add (or ./*)
+gulp.task("deploy:add", function() {
+  return gulp.src("./dist/*")
+    .pipe(git.add());
+});
+
+// Run git commit
+// src are the files to commit (or ./*)
+gulp.task("deploy:commit", function() {
+  return gulp.src("./dist/*")
+    .pipe(git.commit("initial commit"));
+});
+
+
 
