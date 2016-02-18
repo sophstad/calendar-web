@@ -7,7 +7,7 @@ const initialState = {
 }
 
 /* A regular reducer */
-const counter = createReducer(initialState, {
+export default createReducer(initialState, {
   [INCREMENT_COUNTER] (state, action) {
     return { value: state.value + 1 }
   },
@@ -17,7 +17,7 @@ const counter = createReducer(initialState, {
 })
 
 /* An immutable hydrated reducer */
-export default createImmutableReducer(initialState, {
+export const counterImmutable = createImmutableReducer(initialState, {
   [INCREMENT_COUNTER] (state, action) {
     return state.updateIn(['value'], value => value + 1)
   },
