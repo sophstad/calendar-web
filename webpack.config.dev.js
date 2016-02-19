@@ -26,6 +26,8 @@ module.exports = {
   },
   entry: {
     commons: [
+      "es6-promise",
+      "isomorphic-fetch",
       "jquery",
       "moment",
       "react",
@@ -104,9 +106,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
+      "$": "jquery",
+      "jQuery": "jquery",
+      "window.jQuery": "jquery",
+      "fetch": "isomorphic-fetch"
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({

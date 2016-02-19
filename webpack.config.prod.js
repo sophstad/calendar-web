@@ -20,6 +20,8 @@ module.exports = {
   },
   entry: {
     "commons": [
+      "es6-promise",
+      "isomorphic-fetch",
       "jquery",
       "moment",
       "react-lite",
@@ -96,9 +98,10 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]), // saves ~100k from build
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
+      "$": "jquery",
+      "jQuery": "jquery",
+      "window.jQuery": "jquery",
+      "fetch": "isomorphic-fetch"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
