@@ -45,10 +45,9 @@ gulp.task("webpack:build", function() {
 gulp.task("webpack-dev-server", function(callback) {
   var app = express();
   var apiProxy = httpProxy.createProxyServer();
-
-  // Start a webpack-dev-server
   var compiler = webpack(webpackConfig);
 
+  // Start a webpack-dev-server
   app.use(webpackDevMiddleware(compiler, {
     // server and middleware options
     open: true,
