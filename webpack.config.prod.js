@@ -102,7 +102,7 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
-      filename: "js/commons-[hash].js"
+      filename: "js/[name]-[hash].js"
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
