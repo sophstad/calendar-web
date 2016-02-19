@@ -31,7 +31,8 @@ gulp.task("webpack:build", function() {
       if (err) throw new gutil.PluginError("webpack:build", err);
       gutil.log("[webpack:build]", stats.toString({
         // output options
-        colors: true
+        colors: true,
+        chunkModules: true
       }));
       // callback();
     }))
@@ -53,7 +54,10 @@ gulp.task("webpack-dev-server", function(callback) {
     // server and middleware options
     open: true,
     publicPath: webpackConfig.output.publicPath,
-    stats: { colors: true }
+    stats: {
+      colors: true,
+      chunkModules: true
+    }
   }));
 
   // Enables HMR
