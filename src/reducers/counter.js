@@ -15,14 +15,3 @@ export default createReducer(initialState, {
     return { value: state.value - 1 }
   }
 })
-
-/* An immutable hydrated reducer */
-export const counterImmutable = createImmutableReducer(initialState, {
-  [INCREMENT_COUNTER] (state, action) {
-    return state.updateIn(['value'], value => value + 1)
-  },
-  [DECREMENT_COUNTER] (state, action) {
-    return state.updateIn(['value'], value => value - 1)
-  }
-})
-
