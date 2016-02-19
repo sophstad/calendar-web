@@ -30,6 +30,7 @@ gulp.task("webpack:build", function() {
     .pipe(webpackStream(webpackConfig, null, function(err, stats) {
       if (err) throw new gutil.PluginError("webpack:build", err);
       gutil.log("[webpack:build]", stats.toString({
+        // output options
         colors: true
       }));
       // callback();

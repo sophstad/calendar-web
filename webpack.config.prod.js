@@ -32,9 +32,9 @@ module.exports = {
     "index": path.join(srcPath, "index.js")
   },
   output: {
-    path: path.join(__dirname, "dist/js"),
+    path: path.join(__dirname, "dist"),
     publicPath: "",
-    filename: "[name]-[hash].js",
+    filename: "js/[name]-[hash].js"
   },
   module: {
     loaders: [{
@@ -102,7 +102,7 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
-      filename: "commons.js"
+      filename: "js/commons-[hash].js"
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
