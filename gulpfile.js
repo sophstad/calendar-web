@@ -21,7 +21,6 @@ gulp.task("default", ["webpack-dev-server"]);
 // Production build
 gulp.task("build", ["webpack:build"]);
 
-
 /*
  * Build. One and done.
  */
@@ -74,7 +73,6 @@ gulp.task("webpack-dev-server", function(callback) {
     });
   });
 
-
   app.listen(8080, "localhost", function(err) {
     if (err) throw new gutil.PluginError("webpack-dev-server", err);
     // Server listening
@@ -87,7 +85,6 @@ gulp.task("webpack-dev-server", function(callback) {
   });
 });
 
-
 /*
  * Deployment.
  */
@@ -97,5 +94,3 @@ gulp.task("deploy", function() {
       branch: "production"
     }));
 });
-
-
