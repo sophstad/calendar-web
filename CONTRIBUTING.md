@@ -101,6 +101,4 @@ The Aesthetic team represents style in all dimensions. Beauty in design, beauty 
 
 Please try to keep your pull request focused in scope and avoid including unrelated commits.
 
-After you have submitted your pull request, we'll try to get back to you as soon as possible. We may suggest some changes or improvements.
-
-Thank you for contributing!
+Thank you for contributing.

@@ -19,7 +19,9 @@ module.exports = {
     modulesDirectories: ["node_modules", "src"]
   },
   entry: {
-    commons: [
+    "commons": [
+      "es6-promise",
+      "isomorphic-fetch",
       "jquery",
       "moment",
       "react-lite",
@@ -31,12 +33,12 @@ module.exports = {
       "redux-promise",
       "redux-thunk"
     ],
-    index: path.join(srcPath, "index.js")
+    "index": path.join(srcPath, "index.js")
   },
   output: {
     path: path.join(__dirname, "dist"),
     publicPath: "",
-    filename: "[name]-[hash].js",
+    filename: "js/[name]-[hash].js"
   },
   module: {
     loaders: [{
@@ -82,7 +84,7 @@ module.exports = {
   // webpack plugins
   plugins: [
     new ExtractTextPlugin(
-      "[name]-[hash].css",
+      "css/[name]-[hash].css",
       { allChunks: true }
     ),
     new HtmlWebpackPlugin({
@@ -98,13 +100,14 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]), // saves ~100k from build
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
+      "$": "jquery",
+      "jQuery": "jquery",
+      "window.jQuery": "jquery",
+      "fetch": "isomorphic-fetch"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
-      filename: "commons.js"
+      filename: "js/[name]-[hash].js"
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

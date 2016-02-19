@@ -1,3 +1,6 @@
+/* Polyfill */
+require('es6-promise').polyfill()
+
 import { createElement } from 'react'
 import { render } from 'react-dom'
 

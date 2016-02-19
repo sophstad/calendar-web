@@ -3,6 +3,7 @@
 var path = require("path");
 var express = require("express");
 var httpProxy = require("http-proxy");
+var gitSubtree = require('gulp-gh-pages');
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var webpack = require("webpack");
@@ -28,7 +29,9 @@ gulp.task("webpack:build", function() {
     .pipe(webpackStream(webpackConfig, null, function(err, stats) {
       if (err) throw new gutil.PluginError("webpack:build", err);
       gutil.log("[webpack:build]", stats.toString({
-        colors: true
+        // output options
+        colors: true,
+        chunkModules: true
       }));
       // callback();
     }))
@@ -50,7 +53,10 @@ gulp.task("webpack-dev-server", function(callback) {
     // server and middleware options
     open: true,
     publicPath: webpackConfig.output.publicPath,
-    stats: { colors: true }
+    stats: {
+      colors: true,
+      chunkModules: true
+    }
   }));
 
   // Enables HMR
@@ -67,9 +73,8 @@ gulp.task("webpack-dev-server", function(callback) {
     });
   });
 
-
   app.listen(8080, "localhost", function(err) {
-    if(err) throw new gutil.PluginError("webpack-dev-server", err);
+    if (err) throw new gutil.PluginError("webpack-dev-server", err);
     // Server listening
     gutil.log("[webpack-dev-server]", "http://localhost:8080");
 
@@ -80,3 +85,12 @@ gulp.task("webpack-dev-server", function(callback) {
   });
 });
 
+/*
+ * Deployment.
+ */
+gulp.task("deploy", function() {
+  return gulp.src('./dist/**/*')
+    .pipe(gitSubtree({
+      branch: "production"
+    }));
+});
