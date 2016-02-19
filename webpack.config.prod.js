@@ -32,9 +32,9 @@ module.exports = {
     "index": path.join(srcPath, "index.js")
   },
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "dist/js"),
     publicPath: "",
-    filename: "js/[name]-[hash].js",
+    filename: "[name]-[hash].js",
   },
   module: {
     loaders: [{
@@ -80,7 +80,7 @@ module.exports = {
   // webpack plugins
   plugins: [
     new ExtractTextPlugin(
-      "[name]-[hash].css",
+      "css/[name]-[hash].css",
       { allChunks: true }
     ),
     new HtmlWebpackPlugin({
