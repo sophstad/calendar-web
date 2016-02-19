@@ -12,7 +12,7 @@ export default function configureStore(initialState) {
     reducers,
     initialState,
     compose(
-      applyMiddleware(thunk, reduxRouterMiddleware),
+      applyMiddleware(thunk, promiseMiddleware, reduxRouterMiddleware),
       DevTools.instrument()
     )
   )

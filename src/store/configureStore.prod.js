@@ -9,6 +9,6 @@ export default function configureStore(initialState) {
   return createStore(
     reducers,
     initialState,
-    applyMiddleware(thunk, syncHistory(browserHistory))
+    applyMiddleware(thunk, promiseMiddleware, syncHistory(browserHistory))
   )
 }
