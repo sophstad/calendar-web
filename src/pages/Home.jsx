@@ -3,6 +3,7 @@ import React from 'react'
 /* Containers */
 // import MyContainer from 'containers/MyContainer'
 import Counter from 'containers/Counter'
+import Toggler from 'containers/Toggler'
 
 /* Components */
 // import MyComponent from 'components/MyComponent'
@@ -17,6 +18,7 @@ export default class Home extends React.Component {
       <div>
         <h1>{ 'Home Page' }</h1>
         <Counter />
+        <Toggler />
       </div>
     )
   }
