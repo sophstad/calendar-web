@@ -19,7 +19,7 @@ module.exports = {
     modulesDirectories: ["node_modules", "src"]
   },
   entry: {
-    "static/js/commons": [
+    "js/commons": [
       "jquery",
       "moment",
       "react-lite",
@@ -29,7 +29,7 @@ module.exports = {
       "redux",
       "redux-thunk"
     ],
-    "static/js/index": path.join(srcPath, "index.js")
+    "js/index": path.join(srcPath, "index.js")
   },
   output: {
     path: path.join(__dirname, "dist"),
