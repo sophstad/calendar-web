@@ -1,15 +1,19 @@
-/* global __DEV__ */
-import React from 'react'
+/* Polyfill */
+require('es6-promise').polyfill()
+
+import { createElement } from 'react'
 import { render } from 'react-dom'
 
 import ROOT from 'containers/Root'
 
 if (__DEV__) {
-  const RedBox = require('redbox-react')
   try {
     render(ROOT, document.getElementById('root'))
-  } catch (e) {
-    render(<RedBox error={ e } />, document.getElementById('root'))
+  } catch (error) {
+    render(
+      createElement(require('redbox-react'), { error }),
+      document.getElementById('root')
+    )
   }
 } else {
   render(ROOT, document.getElementById('root'))
