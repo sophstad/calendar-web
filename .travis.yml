@@ -18,6 +18,5 @@ deploy:
   file: "dist/*"
   skip_cleanup: true
   on:
-    tags: true
     repo: ADI-Labs/calendar-web
     branch: master
