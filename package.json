@@ -4,19 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "npm run watch:dev",
-    "tests": "npm run test && npm run lint",
-    "deploy": "npm run build:prod && gulp deploy && npm run clean && rimraf .publish",
-    "watch:dev": "cross-env NODE_ENV=development npm run watch",
-    "build:dev": "cross-env NODE_ENV=development npm run build",
-    "watch:prod": "cross-env NODE_ENV=production npm run watch",
-    "build:prod": "cross-env NODE_ENV=production npm run build",
-    "watch": "gulp",
-    "build": "npm run clean && gulp build",
-    "test": "gulp test",
-    "lint": "gulp lint",
-    "clean": "rimraf dist"
+    "start": "gulp",
+    "test": "echo \"No unit tests and e2e tests yet\" && exit 0"
+    "build": "gulp build",
+    "deploy": "gulp deploy",
+    "clean": "rimraf dist .publish"
   },
   "repository": {
     "type": "git",

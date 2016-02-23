@@ -7,4 +7,11 @@ node_js:
   - "node"
 
 script:
-  - npm run build:prod
+  - npm run build
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: npm run deploy
+  on:
+    branch: master
