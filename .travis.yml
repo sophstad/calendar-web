@@ -17,5 +17,6 @@ deploy:
   file_glob: true
   file: "dist/*"
   on:
+    tags: true
     repo: ADI-Labs/calendar-web
     branch: master
