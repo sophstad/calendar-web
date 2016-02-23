@@ -16,6 +16,7 @@ deploy:
     secure: yKrh9atppnCqR2bdLtQx1eL5vlRj2kvCG8vRnu+Plh36+3QmeLAUifZJ6NG/Y52qk0jNBquwO0nTQZ+TOhqG0TYyJDQZw8ap2jOsr1BFjHI8DEoFXQJwYYthhFvtD4qSahgln5G/MKqhZT/g/AFuZ7ZS4n5zjRL8WbBg9a2Ex4/jW+WRcMKOyT3kXUI5u/y9vJf5GZJkY3ILmSEReXppmRS0wMMx3ekxLKMWI7FizPyqU7/gJz1KN+XL8JLM9VB9n79dFjnb4SmsYocr4voATwUyjmbShHe8FXwfdiJm9Wh4tCZK4rS6PJQ6+urPfiTVVWvZNXabvxqWw25AKLmiOa8oTLqcrRNoS5BS8+0N4RqS0V3nlThyn8vtUMwK7UnkC2WmcCVSIC+rPEymvcfYrfKcCgKBmEQtlnxRPy/w8PmwXobE/2VfcMkMN3ZRuDcBkdL1iuFzVJQyj756N/aGkE5+vV+cpYc6YC90vtWAj0NRfQN1Idt2I+9RjNUYDPE7nAdQD6/LMzwWtcbK8GAvDLABVf/5SYDZs+mOVz4Hwuq7BAf1EhtcCbE9VdwGCXdkNJTsZL5N02ywOwMAHPPMYa5uEg0IvIQvaOqjp5KmehSwx68Jw4nyWiqGtAyukGnby8ron+9LTDjbNoYeJkzWNC3JBi76+yIHc5rpyIgr/xw=
   file_glob: true
   file: "dist/*"
+  skip_cleanup: true
   on:
     tags: true
     repo: ADI-Labs/calendar-web
