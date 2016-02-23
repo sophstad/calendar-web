@@ -5,6 +5,7 @@ var gitSubtree = require('gulp-gh-pages');
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var httpProxy = require("http-proxy");
+var path = require("path");
 var webpack = require("webpack");
 var webpackStream = require("webpack-stream");
 var webpackDevMiddleware = require("webpack-dev-middleware");
@@ -46,7 +47,7 @@ gulp.task("webpack-dev-server", function(callback) {
   var apiProxy = httpProxy.createProxyServer();
   var compiler = webpack(webpackConfig);
 
-  // Start a webpack-dev-server
+  // Webpack compilation 
   app.use(webpackDevMiddleware(compiler, {
     // server and middleware options
     open: true,
@@ -57,7 +58,7 @@ gulp.task("webpack-dev-server", function(callback) {
     }
   }));
 
-  // Enables HMR
+  // Hot Module Replacement
   app.use(webpackHotMiddleware(compiler));
 
   // Proxy api requests
@@ -68,6 +69,15 @@ gulp.task("webpack-dev-server", function(callback) {
     }});
   });
 
+  // History API Fallback
+  app.get(function(req, res) {
+    var memoryFs = compiler.outputFileSystem;
+    var index = path.join(webpackConfig.output.path, "index.html");
+    var html = memoryFs.readFileSync(index);
+    res.end(html);
+  })
+
+  // Start a webpack-dev-server
   app.listen(8080, "localhost", function(err) {
     if (err) throw new gutil.PluginError("webpack-dev-server", err);
     // Server listening
