@@ -15,8 +15,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-    - git config --global user.email "sunyang713@hotmail.com"
-    - git config --global user.name "Travis CI"
     - npm run deploy
   on:
     branch: master
