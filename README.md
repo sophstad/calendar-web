@@ -7,7 +7,6 @@ Client app for calendar
 
 
 
-
 ### Setup
 
 
@@ -52,4 +51,3 @@ Sublime Text 3 is recommended with package control installed. Here are some good
  - babel snippets
  - stylus snippets
  - eslint
-
