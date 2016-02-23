@@ -1,11 +1,10 @@
 "use strict";
 
-var path = require("path");
 var express = require("express");
-var httpProxy = require("http-proxy");
 var gitSubtree = require('gulp-gh-pages');
 var gulp = require("gulp");
 var gutil = require("gulp-util");
+var httpProxy = require("http-proxy");
 var webpack = require("webpack");
 var webpackStream = require("webpack-stream");
 var webpackDevMiddleware = require("webpack-dev-middleware");
@@ -62,14 +61,11 @@ gulp.task("webpack-dev-server", function(callback) {
   app.use(webpackHotMiddleware(compiler));
 
   // Proxy api requests
-  app.use("*", function(req, res) {
-    req.url = req.baseUrl; // Janky hack... wtf WRITE SOME FUCKING DOCUMENTATION FUCKING CHRIST.
-    apiProxy.web(req, res, {
-      target: {
-        port: 5000, // TODO put this in config
-        host: "localhost"
-      }
-    });
+  app.all("/api/*", function(req, res) {
+    apiProxy.web(req, res, { target: {
+      host: "localhost",
+      port: 5000
+    }});
   });
 
   app.listen(8080, "localhost", function(err) {
