@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/ADI-Labs/calendar-web.svg?branch=master)](https://travis-ci.org/ADI-Labs/calendar-web)
 
 # calendar-web
-Client app for calendar
+Front-end for calendar
 
 
 
