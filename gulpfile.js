@@ -32,8 +32,7 @@ gulp.task("webpack:build", function() {
       if (err) throw new gutil.PluginError("webpack:build", err);
       gutil.log("[webpack:build]", stats.toString({
         // output options
-        colors: true,
-        chunkModules: true
+        colors: true
       }));
       // callback();
     }))
@@ -55,8 +54,8 @@ gulp.task("webpack-dev-server", function(callback) {
     open: true,
     publicPath: webpackConfigDev.output.publicPath,
     stats: {
-      colors: true,
-      chunkModules: true
+      // output options
+      colors: true
     }
   }));
 
@@ -85,12 +84,11 @@ gulp.task("webpack-dev-server", function(callback) {
   app.listen(8080, "localhost", function(err) {
     if (err) throw new gutil.PluginError("webpack-dev-server", err);
     // Server listening
-    gutil.log("[webpack-dev-server]", "http://localhost:8080");
+    gutil.log("[webpack-dev-server]", " Listening at http://localhost:8080");
 
     // keep the server alive or continue?
     // callback();
-    console.log("Listening at http://localhost:8080");
-    console.log("Compiling ... please wait for \"bundle is VALID\"");
+    gutil.log("Compiling ... please wait for \"bundle is VALID\"");
   });
 });
 
