@@ -78,7 +78,7 @@ gulp.task("webpack-dev-server", function(callback) {
       var html = memoryFs.readFileSync(index);
       res.end(html);
     }
-  })
+  });
 
   // Start a webpack-dev-server
   app.listen(8080, "localhost", function(err) {
