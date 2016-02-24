@@ -4,6 +4,7 @@ var express = require("express");
 var gitSubtree = require('gulp-gh-pages');
 var gulp = require("gulp");
 var gutil = require("gulp-util");
+var history = require('connect-history-api-fallback');
 var httpProxy = require("http-proxy");
 var path = require("path");
 var webpack = require("webpack");
@@ -13,14 +14,13 @@ var webpackHotMiddleware = require("webpack-hot-middleware");
 var webpackConfigProd = require("./webpack.config.prod");
 var webpackConfigDev = require("./webpack.config.dev");
 
-
-// The development server (the recommended option for development)
+/* The development server (the recommended option for development) */
 gulp.task("default", ["webpack-dev-server"]);
 
-// Production build
+/* Production build */
 gulp.task("build", ["webpack:build"]);
 
-// Deploy to production branch
+/* Deploy to production branch */
 gulp.task("deploy", ["git:deploy"]);
 
 /*
@@ -42,13 +42,29 @@ gulp.task("webpack:build", function() {
 /*
  * A customized webpack-dev-server setup.
  * Integrates hot-module-reloading and proxying.
+ * The order of the middleware is very important!!
+ *   1. Proxy api requests
+ *   2. Redirect 404s (history api fallback)
+ *   3. Argument live webpack bundle to directory
+ *   4. Enable hot module replacement
  */
 gulp.task("webpack-dev-server", function(callback) {
   var app = express();
   var apiProxy = httpProxy.createProxyServer();
   var compiler = webpack(webpackConfigDev);
 
-  // Webpack compilation 
+  /* Proxy api requests */
+  app.all("/api/*", function(req, res) {
+    apiProxy.web(req, res, { target: {
+      host: "localhost",
+      port: 5000
+    }});
+  });
+
+  /* History API Fallback */
+  app.use(history());
+
+  /* Webpack compilation */
   app.use(webpackDevMiddleware(compiler, {
     // server and middleware options
     open: true,
@@ -59,36 +75,17 @@ gulp.task("webpack-dev-server", function(callback) {
     }
   }));
 
-  // Hot Module Replacement
+  /* Hot Module Replacement */
   app.use(webpackHotMiddleware(compiler));
 
-  // Proxy api requests
-  app.all("/api/*", function(req, res) {
-    apiProxy.web(req, res, { target: {
-      host: "localhost",
-      port: 5000
-    }});
-  });
-
-  // History API Fallback
-  app.get("*", function(req, res) {
-    if (req.accepts('html')) {
-      var memoryFs = compiler.outputFileSystem;
-      var index = path.join(webpackConfigDev.output.path, "index.html");
-      var html = memoryFs.readFileSync(index);
-      res.end(html);
-    }
-  });
-
-  // Start a webpack-dev-server
+  /* Start a webpack-dev-server */
   app.listen(8080, "localhost", function(err) {
     if (err) throw new gutil.PluginError("webpack-dev-server", err);
     // Server listening
-    gutil.log("[webpack-dev-server]", " Listening at http://localhost:8080");
-
+    gutil.log("[webpack-dev-server] ~ Listening at http://localhost:8080.");
+    gutil.log("Compiling ... Please wait for \"bundle is VALID\" message.");
     // keep the server alive or continue?
     // callback();
-    gutil.log("Compiling ... please wait for \"bundle is VALID\"");
   });
 });
 
