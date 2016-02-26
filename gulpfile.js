@@ -32,6 +32,7 @@ gulp.task("webpack:build", function() {
       if (err) throw new gutil.PluginError("webpack:build", err);
       gutil.log("[webpack:build]", stats.toString({
         // output options
+        chunks: false,
         colors: true
       }));
       // callback();
@@ -53,7 +54,7 @@ gulp.task("webpack-dev-server", function(callback) {
   var apiProxy = httpProxy.createProxyServer();
   var compiler = webpack(webpackConfigDev);
 
-  /* Proxy api requests */
+  /* 1. Proxy api requests */
   app.all("/api/*", function(req, res) {
     apiProxy.web(req, res, { target: {
       host: "localhost",
@@ -61,29 +62,32 @@ gulp.task("webpack-dev-server", function(callback) {
     }});
   });
 
-  /* History API Fallback */
+  /* 2. History API Fallback */
   app.use(history());
 
-  /* Webpack compilation */
+  /* 3. Webpack compilation */
   app.use(webpackDevMiddleware(compiler, {
     // server and middleware options
     open: true,
     publicPath: webpackConfigDev.output.publicPath,
     stats: {
       // output options
+      chunks: false,
       colors: true
     }
   }));
 
-  /* Hot Module Replacement */
+  /* 4. Hot Module Replacement */
   app.use(webpackHotMiddleware(compiler));
 
-  /* Start a webpack-dev-server */
+  /**
+   * Start a webpack-dev-server
+   */
   app.listen(8080, "localhost", function(err) {
     if (err) throw new gutil.PluginError("webpack-dev-server", err);
     // Server listening
-    gutil.log("[webpack-dev-server] ~ Listening at http://localhost:8080.");
-    gutil.log("Compiling ... Please wait for \"bundle is VALID\" message.");
+    gutil.log("[webpack-dev-server]", "==> 🌎  Listening on port 8080.", "Open up http://localhost:8080/ in your browser.");
+
     // keep the server alive or continue?
     // callback();
   });
