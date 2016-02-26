@@ -1,11 +1,11 @@
-
-notifications:
-  email: false
-
+sudo: false
 language: node_js
+cache:
+  directories:
+    node_modules
 
 node_js:
-- node
+- stable
 
 script:
 - npm run build
@@ -20,3 +20,6 @@ deploy:
   on:
     repo: ADI-Labs/calendar-web
     branch: master
+
+notifications:
+  email: false
