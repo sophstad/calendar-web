@@ -1,4 +1,4 @@
-import { TOGGLER } from 'actions/constants'
+import { TOGGLE_TEXT } from 'actions/constants'
 import createReducer from 'store/createReducer'
 
 const initialState = {
@@ -7,7 +7,10 @@ const initialState = {
 
 /* A regular reducer */
 export default createReducer(initialState, {
-  [TOGGLER] (state, action) {
-    return { value: 'yo' }
+  [TOGGLE_TEXT] (state, action) {
+    if (state.value == 'yo')
+      return { value: 'hey' }
+    else
+      return { value: 'yo' }
   }
 })

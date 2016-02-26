@@ -11,7 +11,7 @@ function Toggler(props) {
           { 'Current value: '}
           <span>{ props.value }</span>
         </p>
-        <button className="button" onClick={ props.handleToggler }>{ 'Toggler' }</button>
+        <button className="button" onClick={ props.handleToggle }>{ 'Toggler' }</button>
       </div>
     </div>
   )

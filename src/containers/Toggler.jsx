@@ -1,6 +1,6 @@
 import React from 'react'
 import Toggler from 'components/Toggler'
-import * as togglerActions from 'actions/togglerActions'
+import * as togglerActions from 'actions/toggler'
 import reduxify from 'store/reduxify'
 
 class TogglerContainer extends React.Component {
@@ -9,7 +9,7 @@ class TogglerContainer extends React.Component {
     return (
       <Toggler
         value={ this.props.toggler.value }
-        handleToggler={ this.props.togglerActions.toggler }
+        handleToggle={ this.props.togglerActions.toggle }
       />
     )
   }
