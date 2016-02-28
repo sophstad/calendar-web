@@ -26,7 +26,7 @@ module.exports = {
   },
   entry: {
     commons: [
-      "es6-promise",
+      "babel-polyfill",
       "isomorphic-fetch",
       "jquery",
       "moment",
