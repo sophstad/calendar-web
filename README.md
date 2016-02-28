@@ -18,7 +18,7 @@ $ npm start
 
 This will run the webpack development server. Open `http://localhost:8080`.
 
-### [Contributing - Click me before starting!]( calendar-web/.github/CONTRIBUTING.md )
+### [Contributing - Click me before starting!](blob/master/.github/CONTRIBUTING.md)
 
 
 # Architecture
