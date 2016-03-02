@@ -10,46 +10,16 @@ var srcPath = path.join(__dirname, "src");
 module.exports = {
   debug: true,
   devtool: "#cheap-module-eval-source-map",
-  devServer: {
-    colors: true,
-    contentBase: "./dist",
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    outputPath: path.join(__dirname, "dist"),
-    open: "true"
-  },
   resolve: {
     root: srcPath,
     extensions: ["", ".js", ".jsx", ".styl"],
     modulesDirectories: ["node_modules", "src"]
   },
-  entry: {
-    commons: [
-      "babel-polyfill",
-      "isomorphic-fetch",
-      "jquery",
-      "moment",
-      "react",
-      "react-dom",
-      "react-redux",
-      "react-router",
-      "react-router-redux",
-      "redux",
-      "redux-actions",
-      "redux-devtools",
-      "redux-devtools-dock-monitor",
-      "redux-devtools-log-monitor",
-      "redux-promise",
-      "redux-thunk",
-      "redbox-react"
-    ],
-    index: [
-      "eventsource-polyfill", // necessary for hot reloading with IE
-      "webpack-hot-middleware/client",
-      path.join(srcPath, "index.js"),
-    ]
-  },
+  entry: [
+    "eventsource-polyfill", // necessary for hot reloading with IE
+    "webpack-hot-middleware/client",
+    path.join(srcPath, "index.js"),
+  ],
   output: {
     path: path.join(__dirname, "dist"),
     publicPath: "/",
@@ -102,21 +72,18 @@ module.exports = {
       template: path.join(srcPath, "assets/index.html")
     }),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("development"),
       "__DEV__": true
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
+    }),
     new webpack.ProvidePlugin({
       "$": "jquery",
       "jQuery": "jquery",
       "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
-    }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "commons",
-      filename: "commons.js"
     })
   ]
 }

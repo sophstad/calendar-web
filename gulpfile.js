@@ -80,7 +80,7 @@ gulp.task("webpack-dev-server", function(callback) {
   /* 4. Hot Module Replacement */
   app.use(webpackHotMiddleware(compiler));
 
-  /**
+  /*
    * Start a webpack-dev-server
    */
   app.listen(8080, "localhost", function(err) {
@@ -99,6 +99,6 @@ gulp.task("webpack-dev-server", function(callback) {
 gulp.task("git:deploy", function() {
   return gulp.src('./dist/**/*')
     .pipe(gitSubtree({
-      branch: "production"
+      branch: "build"
     }));
 });

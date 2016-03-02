@@ -68,7 +68,16 @@ module.exports = {
       include: path.join(srcPath, "assets/images"),
       loaders: [
         "file?hash=sha512&digest=hex&name=[hash].[ext]",
-        "image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: \"65-90\", speed: 2, verbose: true}}"
+        "image-webpack?" + JSON.stringify({
+          progressive: true,
+          optimizationLevel: 7,
+          interlaced: false,
+          pngquant: {
+            quality: "65-90",
+            speed: 2,
+            verbose: true
+          }
+        })
       ]
     }]
   },
@@ -105,6 +114,9 @@ module.exports = {
       "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
     }),
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
       filename: "js/[name]-[hash].js"
@@ -112,7 +124,17 @@ module.exports = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
+      compress: {
+        sequences: true,
+        dead_code: true,
+        conditionals: true,
+        booleans: true,
+        unused: true,
+        if_return: true,
+        join_vars: true,
+        drop_console: true,
+        warnings: false
+      }
     })
   ]
 }
