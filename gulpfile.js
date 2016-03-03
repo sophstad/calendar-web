@@ -80,16 +80,16 @@ gulp.task("webpack-dev-server", function(callback) {
   /* 4. Hot Module Replacement */
   app.use(webpackHotMiddleware(compiler));
 
-  /**
+  /*
    * Start a webpack-dev-server
    */
   app.listen(8080, "localhost", function(err) {
     if (err) throw new gutil.PluginError("webpack-dev-server", err);
-    // Server listening
-    gutil.log("[webpack-dev-server]", "==> 🌎  Listening on port 8080.", "Open up http://localhost:8080/ in your browser.");
-
-    // keep the server alive or continue?
-    // callback();
+    gutil.log(
+      "[webpack-dev-server]",
+      "==> 🌎  Listening on port 8080.",
+      "Open up http://localhost:8080/ in your browser."
+    );
   });
 });
 
@@ -99,6 +99,6 @@ gulp.task("webpack-dev-server", function(callback) {
 gulp.task("git:deploy", function() {
   return gulp.src('./dist/**/*')
     .pipe(gitSubtree({
-      branch: "production"
+      branch: "build"
     }));
 });
