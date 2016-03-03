@@ -3,7 +3,6 @@
 var path = require("path");
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var poststylus = require("poststylus");
 var autoprefixer = require("autoprefixer");
 var srcPath = path.join(__dirname, "src");
 
@@ -45,6 +44,7 @@ module.exports = {
       loaders: [
         "style",
         "css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]",
+        "postcss",
         "stylus"
       ]
     }, {
@@ -56,12 +56,6 @@ module.exports = {
       include: path.join(srcPath, "assets/images"),
       loader: "file"
     }]
-  },
-  // misc plugins
-  stylus: {
-    use: [
-      poststylus(["autoprefixer"])
-    ]
   },
   postcss: [autoprefixer],
   // webpack plugins

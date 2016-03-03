@@ -4,7 +4,6 @@ var path = require("path");
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var poststylus = require("poststylus");
 var autoprefixer = require("autoprefixer");
 var srcPath = path.join(__dirname, "src");
 
@@ -50,14 +49,15 @@ module.exports = {
       include: path.join(srcPath, "assets/css"),
       loader: ExtractTextPlugin.extract(
         "style",
-        "css!postcss"
+        "css",
+        "postcss"
       )
     }, {
       test: /\.styl$/,
       include: path.join(srcPath, "assets/styles"),
       loader: ExtractTextPlugin.extract(
         "style",
-        "css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus"
+        "css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!stylus"
       )
     }, {
       test: /\.json$/,
@@ -80,14 +80,6 @@ module.exports = {
         })
       ]
     }]
-  },
-  // misc plugins
-  stylus: {
-    use: [
-      poststylus([
-        "autoprefixer"
-      ])
-    ]
   },
   postcss: [autoprefixer],
   // webpack plugins
