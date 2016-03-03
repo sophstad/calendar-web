@@ -112,7 +112,7 @@ module.exports = {
       "fetch": "isomorphic-fetch"
     }),
     new webpack.ProgressPlugin(function(percentage, message) {
-      process.stderr.write(message, "\r");
+      process.stderr.write(message + "\r");
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",

@@ -77,7 +77,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.ProgressPlugin(function(percentage, message) {
-      process.stderr.write(message, "\r");
+      process.stderr.write(message + "\r");
     }),
     new webpack.ProvidePlugin({
       "$": "jquery",
