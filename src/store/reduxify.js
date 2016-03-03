@@ -1,34 +1,63 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import apply from 'toolbox/apply'
+import merge from 'toolbox/merge'
 
-/**
+/*
  * Reduxifies a container.
  *
- * @param selector  - The name of the desired selector. The selector
- *                    selects what part of the state is given to the container,
- *                    which will then have read-access-only.
- * @param actions   - An array of actions, or a single actionset. The container will
- *                    be allowed to execute these actions.
- * @param container - The container to be connected.
- * @return the connected container
+ * @param selector   - The name of the desired substate, or a function describing
+ *                     the selection logic. The selector selects what part of the
+ *                     state is given to the container.
+ * @param actionSets - An array of actionSets or an object of actionSets.
+ *                     If the actionSets are contained in an array, the resulting
+ *                     injected prop is a single aggregation of all the actions.
+ *                     If the actionSets are contained in an object, multiple props
+ *                     are injected, each corresponding to each actionSet.
+ * @param actionSet  - A single actionSet object. The actionSet will be injected as
+ *                     the 'actions' prop.
+ * @param container  - The container to be connected.
+ * @return           - If the container was specified, the connected container.
+ *                     Otherwise, the enhancer function.
  */
-export default function reduxify({ selector, actions, container }) {
+export default function reduxify({ selector, actionSet, actionSets, container }) {
+  if (actionSet && actionSets)
+    throw new Error("Reduxify use error - please only define <actionSet> or <actionSets>")
+
   // the container will subscribe to Redux store updates
   if (selector)
-    var mapStateToProps = (state) => ({
-      [selector]: state[selector]
+    var mapStateToProps = typeof selector === 'function' ?
+      selector
+    : (state) => ({ [selector]: state[selector] })
+
+  // the container will be provided multiple actionSets
+  if (actionSets)
+    var mapDispatchToProps = Array.isArray(actionSets) ?
+    // Aggregates actionSets into a single 'actions' prop
+      (dispatch) => ({
+        actions: bindActionCreators(
+          merge.apply(null, actionSets),
+          dispatch
+        )
+      })
+    // Injects each actionSet as an individual prop of the container
+    : (dispatch) => apply(
+        actionSets,
+        (actionSet) => bindActionCreators(actionSet, dispatch)
+      )
+  // the container will be provided a single actionSet
+  if (actionSet)
+    var mapDispatchToProps = (dispatch) => ({
+      actions: bindActionCreators(actionSet, dispatch)
     })
 
-  // the container will be provided actions
-  if (actions)
-    var mapDispatchToProps = (dispatch) => apply(
-      actions,
-      (action) => bindActionCreators(action, dispatch)
+  return container ?
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(container)
+  : connect(
+      mapStateToProps,
+      mapDispatchToProps
     )
-
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(container)
 }
