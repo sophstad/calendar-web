@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/ADI-Labs/calendar-web#readme",
   "dependencies": {
-    "es6-promise": "^3.1.2",
+    "babel-polyfill": "^6.5.0",
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.0",
@@ -61,7 +61,6 @@
     "json-loader": "^0.5.4",
     "postcss": "^5.0.15",
     "postcss-loader": "^0.8.0",
-    "poststylus": "^0.2.3",
     "redux-devtools": "^3.1.1",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.4",

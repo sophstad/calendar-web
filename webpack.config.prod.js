@@ -1,26 +1,26 @@
 "use strict";
 
 var path = require("path");
-var webpack = require("webpack");
+var assetsPath = path.resolve("assets");
+var srcPath = path.resolve("src");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var poststylus = require("poststylus");
 var autoprefixer = require("autoprefixer");
-var srcPath = path.join(__dirname, "src");
+var webpack = require("webpack");
 
 module.exports = {
   resolve: {
     alias: {
       "react": "react-lite",
-      "react-dom": "react-lite"
+      "react-dom": "react-lite",
+      "assets": assetsPath
     },
     root: srcPath,
-    extensions: ["", ".js", ".jsx", ".styl"],
-    modulesDirectories: ["node_modules", "src"]
+    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx", ".styl"]
   },
   entry: {
     "commons": [
-      "es6-promise",
+      "babel-polyfill",
       "isomorphic-fetch",
       "jquery",
       "moment",
@@ -33,12 +33,13 @@ module.exports = {
       "redux-promise",
       "redux-thunk"
     ],
-    "index": path.join(srcPath, "index.js")
+    "index": path.resolve(srcPath, "index")
   },
   output: {
-    path: path.join(__dirname, "dist"),
-    publicPath: "",
-    filename: "js/[name]-[hash].js"
+    path: path.resolve("dist"),
+    publicPath: "/assets/",
+    filename: "[name]-[hash].js",
+    chunkFilename: "[id].js"
   },
   module: {
     loaders: [{
@@ -47,38 +48,43 @@ module.exports = {
       loader: "babel"
     }, {
       test: /\.css$/,
-      include: path.join(srcPath, "assets/css"),
+      include: [
+        path.resolve(assetsPath, "css"),
+        path.resolve("node_modules")
+      ],
       loader: ExtractTextPlugin.extract(
         "style",
-        "css!postcss"
+        "css",
+        "postcss"
       )
     }, {
       test: /\.styl$/,
-      include: path.join(srcPath, "assets/styles"),
+      include: path.resolve(assetsPath, "styles"),
       loader: ExtractTextPlugin.extract(
         "style",
-        "css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus"
+        "css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!stylus"
       )
     }, {
       test: /\.json$/,
-      include: path.join(srcPath, "assets"),
+      include: assetsPath,
       loader: "json"
     }, {
       test: /.*\.(gif|png|jpe?g|svg)$/i,
-      include: path.join(srcPath, "assets/images"),
+      include: assetsPath,
       loaders: [
         "file?hash=sha512&digest=hex&name=[hash].[ext]",
-        "image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: \"65-90\", speed: 2, verbose: true}}"
+        "image-webpack?" + JSON.stringify({
+          progressive: true,
+          optimizationLevel: 7,
+          interlaced: false,
+          pngquant: {
+            quality: "65-90",
+            speed: 2,
+            verbose: true
+          }
+        })
       ]
     }]
-  },
-  // misc plugins
-  stylus: {
-    use: [
-      poststylus([
-        "autoprefixer"
-      ])
-    ]
   },
   postcss: [autoprefixer],
   // webpack plugins
@@ -88,9 +94,9 @@ module.exports = {
       { allChunks: true }
     ),
     new HtmlWebpackPlugin({
-      favicon: path.join(srcPath, "assets/images/favicon.png"),
+      favicon: path.resolve(assetsPath, "images/favicon.png"),
       hash: true,
-      template: path.join(srcPath, "assets/index.html")
+      template: path.resolve(assetsPath, "index.html")
     }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production"),
@@ -105,14 +111,27 @@ module.exports = {
       "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
     }),
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
-      filename: "js/[name]-[hash].js"
+      filename: "[name]-[hash].js"
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
+      compress: {
+        sequences: true,
+        dead_code: true,
+        conditionals: true,
+        booleans: true,
+        unused: true,
+        if_return: true,
+        join_vars: true,
+        drop_console: true,
+        warnings: false
+      }
     })
   ]
 }

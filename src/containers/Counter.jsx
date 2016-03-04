@@ -5,11 +5,11 @@ import reduxify from 'store/reduxify'
 
 class CounterContainer extends React.Component {
   render() {
-    return(
+    return (
       <Counter
-        value={ this.props.counter.value }
-        handleIncrement={ this.props.counterActions.increment }
-        handleDecrement={ this.props.counterActions.decrement }
+        value={ this.props.counter.get('value') }
+        handleIncrement={ this.props.actions.increment }
+        handleDecrement={ this.props.actions.decrement }
       />
     )
   }
@@ -18,5 +18,5 @@ class CounterContainer extends React.Component {
 export default reduxify({
   container: CounterContainer,
   selector: 'counter',
-  actions: { counterActions }
+  actionSet: counterActions
 })

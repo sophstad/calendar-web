@@ -1,58 +1,31 @@
 "use strict";
 
 var path = require("path");
-var webpack = require("webpack");
+var assetsPath = path.resolve("assets");
+var srcPath = path.resolve("src");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var poststylus = require("poststylus");
 var autoprefixer = require("autoprefixer");
-var srcPath = path.join(__dirname, "src");
+var webpack = require("webpack");
 
 module.exports = {
   debug: true,
   devtool: "#cheap-module-eval-source-map",
-  devServer: {
-    colors: true,
-    contentBase: "./dist",
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    outputPath: path.join(__dirname, "dist"),
-    open: "true"
-  },
   resolve: {
+    // for big apps, resolve the top level directories
+    alias: {
+      "assets": assetsPath
+    },
     root: srcPath,
-    extensions: ["", ".js", ".jsx", ".styl"],
-    modulesDirectories: ["node_modules", "src"]
+    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx", ".styl"]
   },
-  entry: {
-    commons: [
-      "es6-promise",
-      "isomorphic-fetch",
-      "jquery",
-      "moment",
-      "react",
-      "react-dom",
-      "react-redux",
-      "react-router",
-      "react-router-redux",
-      "redux",
-      "redux-actions",
-      "redux-devtools",
-      "redux-devtools-dock-monitor",
-      "redux-devtools-log-monitor",
-      "redux-promise",
-      "redux-thunk",
-      "redbox-react"
-    ],
-    index: [
-      "eventsource-polyfill", // necessary for hot reloading with IE
-      "webpack-hot-middleware/client",
-      path.join(srcPath, "index.js"),
-    ]
-  },
+  entry: [
+    "eventsource-polyfill", // necessary for hot reloading with IE
+    "webpack-hot-middleware/client",
+    // "./src/index",
+    path.resolve(srcPath, "index")
+  ],
   output: {
-    path: path.join(__dirname, "dist"),
-    publicPath: "/",
+    path: path.resolve("dist"),
     filename: "[name].js",
     pathInfo: true
   },
@@ -63,7 +36,10 @@ module.exports = {
       loader: "babel"
     }, {
       test: /\.css$/,
-      include: path.join(srcPath, "assets/css"),
+      include: [
+        path.resolve(assetsPath, "css"),
+        path.resolve("node_modules")
+      ],
       loaders: [
         "style",
         "css",
@@ -71,52 +47,43 @@ module.exports = {
       ]
     }, {
       test: /\.styl$/,
-      include: path.join(srcPath, "assets/styles"),
+      include: path.resolve(assetsPath, "styles"),
       loaders: [
         "style",
         "css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]",
+        "postcss",
         "stylus"
       ]
     }, {
       test: /\.json$/,
-      include: path.join(srcPath, "assets"),
+      include: assetsPath,
       loader: "json"
     }, {
       test: /\.(jpe?g|png|gif|svg)$/i,
-      include: path.join(srcPath, "assets/images"),
+      include: assetsPath,
       loader: "file"
     }]
-  },
-  // misc plugins
-  stylus: {
-    use: [
-      poststylus(["autoprefixer"])
-    ]
   },
   postcss: [autoprefixer],
   // webpack plugins
   plugins: [
     new HtmlWebpackPlugin({
-      favicon: path.join(srcPath, "assets/images/favicon.png"),
-      hash: true,
-      template: path.join(srcPath, "assets/index.html")
+      favicon: path.resolve(assetsPath, "images/favicon.png"),
+      template: path.resolve(assetsPath, "index.html")
     }),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("development"),
       "__DEV__": true
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
+    }),
     new webpack.ProvidePlugin({
       "$": "jquery",
       "jQuery": "jquery",
       "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
-    }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "commons",
-      filename: "commons.js"
     })
   ]
 }
