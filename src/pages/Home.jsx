@@ -4,6 +4,7 @@ import React from 'react'
 // import MyContainer from 'containers/MyContainer'
 import Counter from 'containers/Counter'
 import Toggler from 'containers/Toggler'
+import Header from 'components/Header'
 
 /* Components */
 // import MyComponent from 'components/MyComponent'
@@ -16,7 +17,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>{ 'Home Page' }</h1>
+        <Header />
         <Counter />
         <Toggler />
       </div>
