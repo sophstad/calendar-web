@@ -13,6 +13,7 @@ function Header(props) {
         </header>
         <h2 className="heading-date">{ 'this.props.date' }</h2>
         <h1 className="page-heading">{ 'this.props.name' }</h1>
+        <div className="button button-header">{ 'Learn More' }</div>
         <h3>{ 'this.props.location' }</h3>
       </div>
     </div>

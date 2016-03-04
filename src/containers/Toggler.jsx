@@ -5,11 +5,10 @@ import reduxify from 'store/reduxify'
 
 class TogglerContainer extends React.Component {
   render() {
-    console.log(this.props.toggler)
     return (
       <Toggler
-        value={ this.props.toggler.value }
-        handleToggle={ this.props.togglerActions.toggle }
+        value={ this.props.toggler.get('value') }
+        handleToggle={ this.props.actions.toggle }
       />
     )
   }
@@ -18,5 +17,5 @@ class TogglerContainer extends React.Component {
 export default reduxify({
   container: TogglerContainer,
   selector: 'toggler',
-  actions: { togglerActions }
+  actionSet: togglerActions
 })

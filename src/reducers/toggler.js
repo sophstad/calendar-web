@@ -1,5 +1,5 @@
 import { TOGGLE_TEXT } from 'actions/constants'
-import createReducer from 'store/createReducer'
+import createReducer from 'store/createImmutableReducer'
 
 const initialState = {
   value: 'hey'
@@ -7,10 +7,7 @@ const initialState = {
 
 /* A regular reducer */
 export default createReducer(initialState, {
-  [TOGGLE_TEXT] (state, action) {
-    if (state.value == 'yo')
-      return { value: 'hey' }
-    else
-      return { value: 'yo' }
-  }
+  [TOGGLE_TEXT]: (state, action) => (
+    (state.get('value') == 'hey') ? state.update('value', value => 'yo') : state.update('value', value => 'hey')
+  )
 })
