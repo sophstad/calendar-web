@@ -16,7 +16,13 @@ module.exports = {
       "assets": assetsPath
     },
     root: srcPath,
-    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx", ".styl"]
+    extensions: [
+      "",
+      ".webpack.js",
+      ".web.js",
+      ".js",
+      ".jsx",
+    ]
   },
   entry: {
     "commons": [
