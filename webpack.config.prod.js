@@ -22,6 +22,7 @@ module.exports = {
       ".web.js",
       ".js",
       ".jsx",
+      ".styl"
     ]
   },
   entry: {
