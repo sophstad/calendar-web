@@ -6,6 +6,7 @@
   "scripts": {
     "start": "gulp",
     "test": "echo \"No unit tests and e2e tests yet\" && exit 0",
+    "lint": "eslint src/**/*.{js,jsx,es6}",
     "build": "gulp build",
     "deploy": "gulp deploy",
     "clean": "rimraf dist .publish"
@@ -48,6 +49,13 @@
     "connect-history-api-fallback": "^1.1.0",
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
+    "eslint": "^2.3.0",
+    "eslint-config-standard": "^5.1.0",
+    "eslint-config-standard-jsx": "^1.1.1",
+    "eslint-config-standard-react": "^2.3.0",
+    "eslint-plugin-promise": "^1.1.0",
+    "eslint-plugin-react": "^4.2.0",
+    "eslint-plugin-standard": "^1.3.2",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
