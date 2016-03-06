@@ -1,6 +1,6 @@
 import React from 'react'
 import Counter from 'components/Counter'
-import * as counterActions from 'actions/counterActions'
+import * as counterActions from 'actions/counter'
 import reduxify from 'store/reduxify'
 
 class CounterContainer extends React.Component {
