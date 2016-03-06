@@ -1,7 +1,7 @@
 "use strict";
 
 var path = require("path");
-var assetsPath = path.resolve("assets");
+var assetsPath = path.resolve("src/assets");
 var srcPath = path.resolve("src");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
