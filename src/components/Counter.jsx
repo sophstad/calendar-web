@@ -8,7 +8,7 @@ function Counter(props) {
       <div className="section">
         <h3 className="section-heading">{ 'Counter' }</h3>
         <p className="section-description">
-          { 'Current value: '}
+          { 'Current value: ' }
           <span styleName="counter-value">{ props.value }</span>
         </p>
         <button className="button button-primary" onClick={ props.handleIncrement }>{ 'Increment' }</button>

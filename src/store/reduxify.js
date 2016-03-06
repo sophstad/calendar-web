@@ -21,18 +21,22 @@ import merge from 'toolbox/merge'
  *                     Otherwise, the enhancer function.
  */
 export default function reduxify({ selector, actionSet, actionSets, container }) {
-  if (actionSet && actionSets)
-    throw new Error("Reduxify use error - please only define <actionSet> or <actionSets>")
+  if (actionSet && actionSets) {
+    throw new Error('Reduxify use error - please only define <actionSet> or <actionSets>')
+  }
 
-  // the container will subscribe to Redux store updates
-  if (selector)
-    var mapStateToProps = typeof selector === 'function' ?
+  var mapStateToProps, mapDispatchToProps
+
+  /* the container will subscribe to Redux store updates */
+  if (selector) {
+    mapStateToProps = typeof selector === 'function' ?
       selector
     : (state) => ({ [selector]: state[selector] })
+  }
 
-  // the container will be provided multiple actionSets
-  if (actionSets)
-    var mapDispatchToProps = Array.isArray(actionSets) ?
+  /* the container will be provided multiple actionSets */
+  if (actionSets) {
+    mapDispatchToProps = Array.isArray(actionSets) ?
     // Aggregates actionSets into a single 'actions' prop
       (dispatch) => ({
         actions: bindActionCreators(
@@ -45,11 +49,14 @@ export default function reduxify({ selector, actionSet, actionSets, container })
         actionSets,
         (actionSet) => bindActionCreators(actionSet, dispatch)
       )
-  // the container will be provided a single actionSet
-  if (actionSet)
-    var mapDispatchToProps = (dispatch) => ({
+  }
+
+  /* the container will be provided a single actionSet */
+  if (actionSet) {
+    mapDispatchToProps = (dispatch) => ({
       actions: bindActionCreators(actionSet, dispatch)
     })
+  }
 
   return container ?
     connect(

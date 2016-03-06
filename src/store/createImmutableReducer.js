@@ -1,4 +1,4 @@
-import { fromJS, toJS } from 'immutable'
+import { fromJS } from 'immutable'
 
 /*
  * Uses <Immutable> type objects to hydrate the state.

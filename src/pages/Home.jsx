@@ -10,7 +10,6 @@ import Counter from 'containers/Counter'
 /* Assets */
 // import MyAsset from 'assets/MyAsset'
 
-
 export default class Home extends React.Component {
   render() {
     return (
