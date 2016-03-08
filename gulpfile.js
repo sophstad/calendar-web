@@ -1,5 +1,6 @@
 "use strict";
 
+var eslint = require("gulp-eslint");
 var express = require("express");
 var gitSubtree = require('gulp-gh-pages');
 var gulp = require("gulp");
@@ -19,6 +20,10 @@ gulp.task("default", ["webpack-dev-server"]);
 
 /* Production build */
 gulp.task("build", ["webpack:build"]);
+
+/* Linting */
+gulp.task("lint", ["eslint:lint"]);
+gulp.task("lint:watch", ["eslint:watch"]);
 
 /* Deploy to production branch */
 gulp.task("deploy", ["git:deploy"]);
@@ -102,3 +107,20 @@ gulp.task("git:deploy", function() {
       branch: "build"
     }));
 });
+
+/*
+ * Linting
+ */
+gulp.task("eslint:lint", function() {
+  return gulp.src(["src/**/*.{js,jsx}", "!node_modules/**"])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+/*
+ * Watch lint
+ */
+gulp.task("eslint:watch", function() {
+  return gulp.watch(["./src/**/*.{js,jsx}"], ["lint"]);
+})
