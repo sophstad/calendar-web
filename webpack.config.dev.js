@@ -16,13 +16,6 @@ module.exports = {
       "assets": assetsPath
     },
     root: srcPath,
-    extensions: [
-      "",
-      ".webpack.js",
-      ".web.js",
-      ".js",
-      ".jsx"
-    ]
   },
   entry: [
     "eventsource-polyfill", // necessary for hot reloading with IE
@@ -37,7 +30,7 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js$/,
       include: srcPath,
       loader: "babel"
     }, {

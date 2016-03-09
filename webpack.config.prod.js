@@ -15,14 +15,7 @@ module.exports = {
       "react-dom": "react-lite",
       "assets": assetsPath
     },
-    root: srcPath,
-    extensions: [
-      "",
-      ".webpack.js",
-      ".web.js",
-      ".js",
-      ".jsx"
-    ]
+    root: srcPath
   },
   entry: {
     "commons": [
@@ -49,7 +42,7 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js$/,
       include: srcPath,
       loader: "babel"
     }, {

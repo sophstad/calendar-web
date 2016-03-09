@@ -7,8 +7,8 @@
     "start": "gulp",
     "test": "ava",
     "test:watch": "ava --watch",
-    "lint": "eslint src/**/*.{js,jsx,es6}",
     "build": "webpack --progress --profile --colors --config webpack.config.prod.js",
+    "lint": "eslint src/**/*.js",
     "deploy": "gulp deploy",
     "clean": "rimraf dist .publish"
   },
