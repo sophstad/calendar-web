@@ -76,7 +76,6 @@
     "postcss": "^5.0.15",
     "postcss-loader": "^0.8.0",
     "react-addons-test-utils": "^0.14.7",
-    "redbox-react": "^1.2.2",
     "redux-ava": "^1.0.0",
     "redux-devtools": "^3.1.1",
     "redux-devtools-dock-monitor": "^1.0.1",
