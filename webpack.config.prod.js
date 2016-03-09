@@ -12,23 +12,15 @@ module.exports = {
   resolve: {
     alias: {
       "react": "react-lite",
-      "react-dom": "react-lite",
-      "assets": assetsPath
+      "react-dom": "react-lite"
+      // "assets": assetsPath
     },
-    root: srcPath,
-    extensions: [
-      "",
-      ".webpack.js",
-      ".web.js",
-      ".js",
-      ".jsx"
-    ]
+    root: srcPath
   },
   entry: {
     "commons": [
       "babel-polyfill",
       "isomorphic-fetch",
-      "jquery",
       "moment",
       "react-lite",
       "react-redux",
@@ -49,7 +41,7 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js$/,
       include: srcPath,
       loader: "babel"
     }, {
@@ -111,13 +103,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]), // saves ~100k from build
     new webpack.ProvidePlugin({
-      "$": "jquery",
-      "jQuery": "jquery",
-      "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
-    }),
-    new webpack.ProgressPlugin(function(percentage, message) {
-      process.stderr.write(message + "\r");
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
