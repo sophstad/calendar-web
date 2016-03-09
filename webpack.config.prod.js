@@ -110,7 +110,6 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]), // saves ~100k from build
-    new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
       "$": "jquery",
       "jQuery": "jquery",
