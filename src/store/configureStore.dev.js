@@ -5,7 +5,7 @@ import reducers from 'reducers'
 import DevTools from 'containers/DevTools'
 
 export default function configureStore(initialState) {
-  const store = createStore(
+  return createStore(
     reducers,
     initialState,
     compose(
@@ -13,12 +13,4 @@ export default function configureStore(initialState) {
       DevTools.instrument()
     )
   )
-
-  if (module.hot) {
-    module.hot.accept('reducers', () =>
-      store.replaceReducer(require('reducers').default)
-    )
-  }
-
-  return store
 }
