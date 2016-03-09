@@ -131,7 +131,7 @@ gulp.task("ava:watch", function() {
  * Linting
  */
 gulp.task("eslint:lint", function() {
-  return gulp.src(["src/**/*.{js,jsx}", "!node_modules/**"])
+  return gulp.src("src/**/*.{js,jsx}")
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());

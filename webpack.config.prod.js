@@ -21,8 +21,7 @@ module.exports = {
       ".webpack.js",
       ".web.js",
       ".js",
-      ".jsx",
-      ".styl"
+      ".jsx"
     ]
   },
   entry: {
