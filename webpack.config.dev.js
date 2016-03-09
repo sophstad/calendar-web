@@ -9,20 +9,21 @@ var webpack = require("webpack");
 
 module.exports = {
   debug: true,
-  devtool: "#cheap-module-eval-source-map",
+  devtool: "#source-map",
+  devServer: {
+    historyApiFallback: true,
+    proxy: {
+      "/api/*": "http://localhost:5000"
+    }
+  },
   resolve: {
     // for big apps, resolve the top level directories
-    alias: {
-      "assets": assetsPath
-    },
-    root: srcPath,
+    // alias: {
+    //   "assets": assetsPath
+    // },
+    root: srcPath
   },
-  entry: [
-    "eventsource-polyfill", // necessary for hot reloading with IE
-    "webpack-hot-middleware/client",
-    // "./src/index",
-    path.resolve(srcPath, "index")
-  ],
+  entry: path.resolve(srcPath, "index"),
   output: {
     path: path.resolve("dist"),
     filename: "[name].js",
@@ -64,7 +65,6 @@ module.exports = {
     }]
   },
   postcss: [autoprefixer],
-  // webpack plugins
   plugins: [
     new HtmlWebpackPlugin({
       favicon: path.resolve(assetsPath, "images/favicon.png"),
@@ -72,11 +72,6 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "__DEV__": true
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.ProgressPlugin(function(percentage, message) {
-      process.stderr.write(message + "\r");
     }),
     new webpack.ProvidePlugin({
       "$": "jquery",

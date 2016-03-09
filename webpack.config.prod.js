@@ -12,8 +12,8 @@ module.exports = {
   resolve: {
     alias: {
       "react": "react-lite",
-      "react-dom": "react-lite",
-      "assets": assetsPath
+      "react-dom": "react-lite"
+      // "assets": assetsPath
     },
     root: srcPath
   },
