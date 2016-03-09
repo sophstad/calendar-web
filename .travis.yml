@@ -8,8 +8,8 @@ node_js:
 
 before_script:
   - npm install -g gulp
-  - npm run lint
 script:
+  - gulp lint
   - npm run build
 
 notifications:

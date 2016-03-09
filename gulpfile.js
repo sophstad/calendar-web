@@ -1,5 +1,7 @@
 "use strict";
 
+var ava = require("gulp-ava");
+var eslint = require("gulp-eslint");
 var express = require("express");
 var gitSubtree = require('gulp-gh-pages');
 var gulp = require("gulp");
@@ -19,6 +21,14 @@ gulp.task("default", ["webpack-dev-server"]);
 
 /* Production build */
 gulp.task("build", ["webpack:build"]);
+
+/* Linting */
+gulp.task("lint", ["eslint:lint"]);
+gulp.task("lint:watch", ["eslint:watch"]);
+
+/* Testing */
+gulp.task("test", ["ava:test"]);
+gulp.task("test:watch", ["ava:watch"]);
 
 /* Deploy to production branch */
 gulp.task("deploy", ["git:deploy"]);
@@ -97,8 +107,39 @@ gulp.task("webpack-dev-server", function(callback) {
  * Deployment.
  */
 gulp.task("git:deploy", function() {
-  return gulp.src('./dist/**/*')
+  return gulp.src("dist/**/*")
     .pipe(gitSubtree({
       branch: "build"
     }));
 });
+
+/*
+ * Testing. Unusuable until the cow adds options.
+ */
+gulp.task("ava:test", function() {
+  return gulp.src("test/**/*.js")
+    .pipe(ava());
+});
+/*
+ * Watch tests.
+ */
+gulp.task("ava:watch", function() {
+  return gulp.watch(["test/**/*.js", "src/**/*.js"], ["test"]);
+});
+
+/*
+ * Linting
+ */
+gulp.task("eslint:lint", function() {
+  return gulp.src(["src/**/*.{js,jsx}", "!node_modules/**"])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+/*
+ * Watch lint
+ */
+gulp.task("eslint:watch", function() {
+  return gulp.watch(["./src/**/*.{js,jsx}"], ["lint"]);
+})
