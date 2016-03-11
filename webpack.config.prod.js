@@ -35,7 +35,7 @@ module.exports = {
   },
   output: {
     path: path.resolve("dist"),
-    publicPath: "/assets/",
+    publicPath: "",
     filename: "[name]-[hash].js",
     chunkFilename: "[id].js"
   },
@@ -88,7 +88,7 @@ module.exports = {
   // webpack plugins
   plugins: [
     new ExtractTextPlugin(
-      "css/[name]-[hash].css",
+      "[name]-[hash].css",
       { allChunks: true }
     ),
     new HtmlWebpackPlugin({

@@ -11,9 +11,14 @@ module.exports = {
   debug: true,
   devtool: "#source-map",
   devServer: {
+    contentBase: "dist",
     historyApiFallback: true,
+    hot: true,
     proxy: {
       "/api/*": "http://localhost:5000"
+    },
+    stats: {
+      chunks: false
     }
   },
   resolve: {
@@ -23,11 +28,16 @@ module.exports = {
     // },
     root: srcPath
   },
-  entry: path.resolve(srcPath, "index"),
+  entry: [
+    "webpack-dev-server/client?http://localhost:8080/",
+    "webpack/hot/dev-server",
+    path.resolve(srcPath, "index")
+  ],
   output: {
-    path: path.resolve("dist"),
     filename: "[name].js",
-    pathInfo: true
+    path: path.resolve("dist"),
+    pathInfo: true,
+    publicPath: ""
   },
   module: {
     loaders: [{
@@ -72,6 +82,10 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "__DEV__": true
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
     }),
     new webpack.ProvidePlugin({
       "fetch": "isomorphic-fetch"

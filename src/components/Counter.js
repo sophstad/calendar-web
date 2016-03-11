@@ -11,8 +11,12 @@ export function Counter(props) {
           { 'Current value: ' }
           <span styleName="counter-value">{ props.value }</span>
         </p>
-        <button className="button button-primary" onClick={ props.handleIncrement }>{ 'Increment' }</button>
-        <button className="button" onClick={ props.handleDecrement }>{ 'Decrement' }</button>
+        <button className="button button-primary" onClick={ props.handleIncrement }>
+          { 'Increment' }
+        </button>
+        <button className="button" onClick={ props.handleDecrement }>
+          { 'Decrement' }
+        </button>
       </div>
     </div>
   )

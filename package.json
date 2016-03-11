@@ -4,12 +4,10 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "npm run watch",
     "test": "ava",
     "lint": "eslint src/**/*.js",
-    "build": "webpack --profile --progress --colors --config webpack.config.prod.js",
-    "watch": "webpack-dev-server --progress --colors --config webpack.config.dev.js",
-    "deploy": "gulp deploy",
+    "build": "webpack --profile --colors --config webpack.config.prod.js",
+    "watch": "webpack-dev-server --config webpack.config.dev.js",
     "clean": "rimraf dist .publish"
   },
   "repository": {
