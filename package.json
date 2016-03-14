@@ -4,10 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "ava",
-    "lint": "eslint src/**/*.js",
+    "start": "node server",
     "build": "webpack --profile --colors --config webpack.config.prod.js",
     "watch": "webpack-dev-server --config webpack.config.dev.js",
+    "lint": "eslint src/**/*.js",
+    "test": "ava",
     "clean": "rimraf dist .publish"
   },
   "repository": {
@@ -58,6 +59,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.6.5",
     "css-loader": "^0.23.1",
+    "css-modules-require-hook": "^4.0.0",
     "enzyme": "^2.0.0",
     "eslint": "^2.3.0",
     "eslint-plugin-promise": "^1.1.0",
