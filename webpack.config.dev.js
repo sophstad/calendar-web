@@ -37,7 +37,7 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve("dist"),
     pathInfo: true,
-    publicPath: ""
+    publicPath: "/"
   },
   module: {
     loaders: [{
