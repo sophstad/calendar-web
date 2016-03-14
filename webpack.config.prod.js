@@ -17,27 +17,11 @@ module.exports = {
     },
     root: srcPath
   },
-  entry: {
-    "commons": [
-      "babel-polyfill",
-      "isomorphic-fetch",
-      "moment",
-      "react-lite",
-      "react-redux",
-      "react-router",
-      "react-router-redux",
-      "redux",
-      "redux-actions",
-      "redux-promise",
-      "redux-thunk"
-    ],
-    "index": path.resolve(srcPath, "index")
-  },
+  entry: path.resolve(srcPath, "index"),
   output: {
     path: path.resolve("dist"),
     publicPath: "",
-    filename: "[name]-[hash].js",
-    chunkFilename: "[id].js"
+    filename: "[name]-[hash].bundle.js"
   },
   module: {
     loaders: [{
@@ -46,14 +30,10 @@ module.exports = {
       loader: "babel"
     }, {
       test: /\.css$/,
-      include: [
-        path.resolve(assetsPath, "css"),
-        path.resolve("node_modules")
-      ],
+      include: path.resolve(assetsPath, "css"),
       loader: ExtractTextPlugin.extract(
         "style",
-        "css",
-        "postcss"
+        "css!postcss"
       )
     }, {
       test: /\.styl$/,
@@ -93,7 +73,6 @@ module.exports = {
     ),
     new HtmlWebpackPlugin({
       favicon: path.resolve(assetsPath, "images/favicon.png"),
-      hash: true,
       template: path.resolve(assetsPath, "index.html")
     }),
     new webpack.DefinePlugin({
@@ -102,12 +81,28 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]), // saves ~100k from build
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
+    }),
     new webpack.ProvidePlugin({
       "fetch": "isomorphic-fetch"
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "commons",
-      filename: "[name]-[hash].js"
+      name: "vendor",
+      filename: "vendor-[hash].js",
+      chunks: [
+        "babel-polyfill",
+        "isomorphic-fetch",
+        "moment",
+        "react-lite",
+        "react-redux",
+        "react-router",
+        "react-router-redux",
+        "redux",
+        "redux-actions",
+        "redux-promise",
+        "redux-thunk"
+      ]
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

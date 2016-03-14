@@ -11,7 +11,9 @@ module.exports = {
   debug: true,
   devtool: "#source-map",
   devServer: {
-    contentBase: "dist",
+    // contentBase technically not needed...
+    // b/c everything is served from mem
+    contentBase: path.resolve("dist"),
     historyApiFallback: true,
     hot: true,
     proxy: {
@@ -34,10 +36,12 @@ module.exports = {
     path.resolve(srcPath, "index")
   ],
   output: {
-    filename: "[name].js",
+    filename: "[name].bundle.js",
     path: path.resolve("dist"),
-    pathInfo: true,
-    publicPath: ""
+    pathinfo: true,
+    publicPath: "",
+    // sourceMapFilename must be named 'index' for sourcemapping to work. fucking stupid.
+    sourceMapFilename: "index.js.map"
   },
   module: {
     loaders: [{
@@ -46,10 +50,7 @@ module.exports = {
       loader: "babel"
     }, {
       test: /\.css$/,
-      include: [
-        path.resolve(assetsPath, "css"),
-        path.resolve("node_modules")
-      ],
+      include: path.resolve(assetsPath, "css"),
       loaders: [
         "style",
         "css",
