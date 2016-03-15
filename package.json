@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/ADI-Labs/calendar-web.git"
   },
-  "author": "Jonathan Sun",
+  "author": "Jonathan Sun <sunyang713@hotmail.com> (https://github.com/sunyang713)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ADI-Labs/calendar-web/issues"

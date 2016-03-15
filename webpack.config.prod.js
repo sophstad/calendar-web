@@ -20,7 +20,7 @@ module.exports = {
   entry: path.resolve(srcPath, "index"),
   output: {
     path: path.resolve("dist"),
-    publicPath: "",
+    publicPath: "/",
     filename: "[name]-[hash].bundle.js"
   },
   module: {
