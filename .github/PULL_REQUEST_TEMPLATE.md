@@ -1,6 +1,6 @@
 ## Prerequisites
 
-- [ ] Read the [contributing guidelines](CONTRIBUTING.md). Follow these [examples]()
+- [ ] Read the [contributing guidelines](CONTRIBUTING.md). Follow these [examples](CONTRIBUTING.md#examples)
 - [ ] Write [regression] tests for your change.
 - [ ] Run tests. `$ npm run test`
 - [ ] Run linting. `$ npm run lint`
