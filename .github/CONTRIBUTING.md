@@ -13,12 +13,12 @@ Before opening an issue, please search the [issue tracker](https://github.com/AD
 
 ## Development
 
-Visit the [issue tracker](https://github.com/reactjs/redux/issues) to find a list of open issues that need attention.
+Visit the [issue tracker](https://github.com/ADI-Labs/calendar-web/issues) to find a list of open issues that need attention.
 
 Fork, then clone the repo:
 
 ```bash
-$ git clone https://github.com/<your-username>/redux.git
+$ git clone https://github.com/<your-username>/calendar-web.git
 ```
 
 ### Building Calendar
