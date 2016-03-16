@@ -128,7 +128,7 @@ $ npm run test
 $ npm run lint
 ```
 
-Pull the latest updates from the `master` branch to ensure your changes do not conflict with or affect any functionality of the application.
+Pull and merge the latest updates from the `master` branch to your branch ensure your changes do not conflict with or affect any functionality of the application and your improved changes persist.
 
 ```bash
 $ git pull origin
