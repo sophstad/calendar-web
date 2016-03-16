@@ -1,5 +1,5 @@
 # Contributing
-We are open to, and grateful for, any contributions made by the community.  By contributing to Calendar, you agree to abide by the [code of conduct](https://github.com/ADI-Labs/calendar-web/blob/master/CODE_OF_CONDUCT.md).
+We are open to, and grateful for, any contributions made by the community.  By contributing to Calendar, you agree to abide by the [code of conduct](CODE_OF_CONDUCT.md).
 
 ## General
 
@@ -17,14 +17,14 @@ Visit the [issue tracker](https://github.com/ADI-Labs/calendar-web/issues) to fi
 
 Fork, then clone the repo:
 
-```bash
+```
 $ git clone https://github.com/<your-username>/calendar-web.git
 ```
 
 ### Building Calendar
 
 Running the `build` task will compile and produce the build.
-```bash
+```
 $ npm run build
 ```
 
@@ -34,7 +34,7 @@ The result will be in the `dist` folder.
 
 Running the `watch` task will compile the build and initiate the development server.
 
-```bash
+```
 $ npm run watch
 ```
 
@@ -46,12 +46,12 @@ Open `http://localhost:8080` in your browser.
 Please check your code using `npm run lint` before submitting your pull requests. The CI build will fail if linting errors are detected.
 
 To run tests, run the following:
-```bash
+```
 $ npm run test
 ```
 
 To perform linting with `eslint`, run the following:
-```bash
+```
 $ npm run lint
 ```
 
@@ -117,7 +117,7 @@ Follow the PR template instructions. Read below for more details.
 
 Write [regression] tests for your change. Run the test suite and lint your changes.
 
-```bash
+```
 $ npm run test
   . . .
   ✔ a › a.a › <should do x>
@@ -130,7 +130,7 @@ $ npm run lint
 
 Pull and merge the latest updates from the `master` branch to your branch ensure your changes do not conflict with or affect any functionality of the application and your improved changes persist.
 
-```bash
+```
 $ git pull origin
 ```
 
