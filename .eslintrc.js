@@ -24,6 +24,6 @@ module.exports = {
     "promise/param-names": "error",
     "promise/always-return": "error",
     "promise/catch-or-return": "error",
-    "react/prop-types": 0
+    "react/prop-types": "off"
   }
 };
