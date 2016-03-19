@@ -33,6 +33,7 @@ module.exports = {
   entry: [
     "webpack-dev-server/client?http://localhost:8080/",
     "webpack/hot/dev-server",
+    "babel-polyfill",
     path.resolve(srcPath, "index")
   ],
   output: {
