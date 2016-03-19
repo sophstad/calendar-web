@@ -101,7 +101,9 @@ module.exports = {
         "redux",
         "redux-actions",
         "redux-promise",
-        "redux-thunk"
+        "redux-saga",
+        "redux-thunk",
+        "reselect"
       ]
     }),
     new webpack.optimize.DedupePlugin(),
