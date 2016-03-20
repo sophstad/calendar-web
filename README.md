@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/ADI-Labs/calendar-web.svg?branch=master)](https://travis-ci.org/ADI-Labs/calendar-web)
 
 # calendar-web
+Client-side for [calendar](https://github.com/ADI-Labs/calendar)
 
 ### Setup
 
@@ -20,8 +21,8 @@ This will run the webpack development server. Open `http://localhost:8080`.
 ### Core Technology
  - ECMAScript 2015 (ES6) syntax
  - React.js
- - The (pseudo) FLUX Architecture is managed with *Redux*. Additional utilities and modules:
+ - Redux
 
 ### Styling
- - **Stylus** is the preprocessor.
- - **Skeleton** is the CSS framework.
+ - *Stylus* is the preprocessor.
+ - *Skeleton* is the CSS framework.
