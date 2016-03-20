@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node server",
     "build": "webpack --profile --colors --config webpack/config.prod.js",
-    "watch": "webpack-dev-server --config webpack/config.dev.js",
     "lint": "eslint src test",
     "test": "ava",
     "clean": "rimraf dist .publish"
@@ -74,11 +73,13 @@
     "gulp-gh-pages": "^0.5.4",
     "gulp-util": "^3.0.7",
     "html-webpack-plugin": "^2.8.1",
+    "http-proxy": "^1.13.2",
     "image-webpack-loader": "^1.6.3",
     "json-loader": "^0.5.4",
     "postcss": "^5.0.15",
     "postcss-loader": "^0.8.0",
     "react-addons-test-utils": "^0.14.7",
+    "redbox-react": "^1.2.2",
     "redux-ava": "^1.0.0",
     "redux-devtools": "^3.1.1",
     "redux-devtools-dock-monitor": "^1.0.1",
@@ -88,6 +89,8 @@
     "stylus": "^0.53.0",
     "stylus-loader": "^1.5.1",
     "webpack": "^1.12.13",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-middleware": "^1.5.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0"
   }
 }
