@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node server",
-    "build": "webpack --profile --colors --config webpack.config.prod.js",
-    "watch": "webpack-dev-server --config webpack.config.dev.js",
+    "build": "webpack --profile --colors --config webpack/config.prod.js",
+    "watch": "webpack-dev-server --config webpack/config.dev.js",
     "lint": "eslint src/**/*.js",
     "test": "ava",
     "clean": "rimraf dist .publish"
