@@ -5,7 +5,7 @@ import reducers from 'reducers'
 import DevTools from 'containers/DevTools'
 
 export default function configureStore(initialState) {
-  return createStore(
+  const store = createStore(
     reducers,
     initialState,
     compose(
@@ -13,4 +13,13 @@ export default function configureStore(initialState) {
       DevTools.instrument()
     )
   )
+
+  // Enable Webpack hot module replacement for reducers
+  if (module.hot)
+    module.hot.accept('reducers', () => {
+      const nextRootReducer = require('reducers').default
+      store.replaceReducer(nextRootReducer)
+    })
+
+  return store
 }

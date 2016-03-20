@@ -31,9 +31,8 @@ module.exports = {
     root: srcPath
   },
   entry: [
-    "webpack-dev-server/client?http://localhost:8080/",
-    "webpack/hot/dev-server",
     "babel-polyfill",
+    "webpack-hot-middleware/client",
     path.resolve(srcPath, "index")
   ],
   output: {
@@ -86,6 +85,7 @@ module.exports = {
       "__DEV__": true
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.ProgressPlugin(function(percentage, message) {
       process.stderr.write(message + "\r");
     }),
