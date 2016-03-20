@@ -1,5 +1,5 @@
 module.exports = {
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:ava/recommended"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -8,6 +8,7 @@ module.exports = {
     }
   },
   "plugins": [
+    "ava",
     "promise",
     "react"
   ],
