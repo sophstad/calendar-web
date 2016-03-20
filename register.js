@@ -2,6 +2,7 @@
 require('app-module-path').addPath(require('path').resolve(__dirname, 'src'))
 
 // transform all imports with Babel
+// TODO: this is bad for production.
 require('babel-register')
 
 // transform stylus imports with css-modules
