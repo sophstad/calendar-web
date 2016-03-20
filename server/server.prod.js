@@ -11,7 +11,7 @@ import { fromJS } from 'immutable'
 import Routes from 'Routes'
 import calendarApp from 'reducers'
 
-const document = fs.readFileSync(path.resolve('dist/index.html'), 'utf8')
+let document = fs.readFileSync(path.resolve('dist/index.html'), 'utf8')
 
 const app = express()
 const port = 3000
@@ -63,15 +63,15 @@ function renderApp(renderProps) {
 function renderFullPage(html, initialState) {
   const rootExp = /(<div id="root">)/i
   const scriptExp = /(<script)/i
-  const doc = document.replace(rootExp, () => `<div id="root">${ html }`)
-  const docc = doc.replace(scriptExp, () => `
+  document = document.replace(rootExp, () => `<div id="root">${ html }`)
+  document = document.replace(scriptExp, () => `
     <script>
       window.__INITIAL_STATE__ = ${ JSON.stringify(initialState) }
     </script>
     <script`
   )
 
-  return doc
+  return document
 }
 
 app.listen(port, error => error ?
