@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from 'assets/styles/counter.styl'
 
-export function Counter(props) {
+function Counter(props) {
   return (
     <div className="container">
       <div className="section">

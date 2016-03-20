@@ -2,7 +2,7 @@ import test from 'ava'
 import expect, { createSpy } from 'expect'
 import { createElement } from 'react'
 import { shallow } from 'enzyme'
-import { Counter } from 'components/Counter'
+import Counter from 'components/Counter'
 const SIX = 4
 
 function setup(value = 0) {
