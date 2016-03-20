@@ -7,32 +7,37 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
+import { fromJS } from 'immutable'
 import Routes from 'Routes'
 import calendarApp from 'reducers'
 
-const html = fs.readFileSync(path.resolve('dist/index.html'), 'utf8')
+const document = fs.readFileSync(path.resolve('dist/index.html'), 'utf8')
 
 const app = express()
 const port = 3000
 
 app.use(serve)
-app.use(express.static('dist'))
+app.use(express.static(path.resolve('dist')))
 
-function serve(req, res) {
+function serve(req, res, next) {
   match({ routes: Routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    if (error)
+    if (error) {
       res.status(500).send(error.message) // this is a bad idea.
-    else if (redirectLocation)
+    } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    else if (renderProps) {
+    } else if (renderProps) {
       // You can also check renderProps.components or renderProps.routes for
       // your "not found" component or route respectively, and send a 404 as
       // below, if you're using a catch-all route.
 
       // Send the rendered page back to the client
-      res.status(200).send(renderApp(renderProps))
-    } else
+      if (req.url === '/')
+        res.status(200).send(renderApp(renderProps))
+      else
+        next()
+    } else {
       res.status(404).send('Not found')
+    }
   })
 }
 
@@ -41,45 +46,35 @@ function renderApp(renderProps) {
   const store = createStore(calendarApp)
 
   // Render the component to a string
-  const appHtml = renderToString(
+  const html = renderToString(
     <Provider store={ store }>
       <RouterContext {...renderProps} />
     </Provider>
   )
 
   // Grab the initial state from our Redux store
-  const initialState = store.getState()
+  const initialState = fromJS(store.getState()).toJS()
 
   // Send the rendered page back to the client
-  return renderFullPage(appHtml, initialState)
+  return renderFullPage(html, initialState)
 }
 
-function renderFullPage(appHtml, initialState) {
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-       <title>Calendar</title>
-      </head>
-      <body>
+// sketchy afff
+function renderFullPage(html, initialState) {
+  const rootExp = /(<div id="root">)/i
+  const scriptExp = /(<script)/i
+  const doc = document.replace(rootExp, () => `<div id="root">${ html }`)
+  const docc = doc.replace(scriptExp, () => `
+    <script>
+      window.__INITIAL_STATE__ = ${ JSON.stringify(initialState) }
+    </script>
+    <script`
+  )
 
-        <div id="root">
-          ${html}
-        </div>
-
-        <script>
-          window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
-        </script>
-
-      </body>
-    </html>
-  `
+  return doc
 }
 
-app.listen(port, (error) => {
-  if (error) {
+app.listen(port, error => error ?
     console.error(error)
-  } else {
-    console.info(`==> 🌎  Listening on port ${port}. Open up http://localhost:${port}/ in your browser.`)
-  }
-})
+  : console.info(`==> 🌎  Listening on port ${ port }. Open up http://localhost:${ port }/ in your browser.`)
+)

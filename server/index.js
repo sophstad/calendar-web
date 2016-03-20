@@ -1,11 +1,12 @@
 // Modify included modules for require()
 require('app-module-path').addPath(require('path').resolve(__dirname, '../src'))
 
+
 // transform all imports with Babel
 require('babel-register')
 
 // transform stylus imports with css-modules
-var hook = require('css-modules-require-hook/preset')
+require('css-modules-require-hook/preset')
 
 // include the environment polyfill
 require('babel-polyfill')
