@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from 'store/configureStore'
-import Root from 'containers/Root'
 
-const rootElement = document.getElementById('root')
-const store = configureStore(window.__INITIAL_STATE__)
-const history = syncHistoryWithStore(browserHistory, store)
+const rootElement   = document.getElementById('root')
+const store         = configureStore(window.__INITIAL_STATE__)
+const history       = syncHistoryWithStore(browserHistory, store)
 
-let render = (App) => ReactDOM.render(App, rootElement)
+let render = () => {
+  const App = require('containers/Root').default
+  ReactDOM.render(<App store={ store } history={ history } />, rootElement)
+}
 
 if (module.hot) {
   // Support hot reloading of components
@@ -23,20 +25,15 @@ if (module.hot) {
     )
   }
 
-  render = (App) => {
+  render = () => {
     try {
-      renderApp(App)
+      renderApp()
     } catch (error) {
       renderError(error)
     }
   }
 
-  module.hot.accept('containers/Root', () => {
-    setTimeout(() => {
-      const HotRoot = require('containers/Root').default
-      render(<HotRoot store={ store } history={ history } />)
-    })
-  })
+  module.hot.accept('containers/Root', render)
 }
 
-render(<Root store={ store } history={ history } />)
+render()
