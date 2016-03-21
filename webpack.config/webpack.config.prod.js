@@ -79,7 +79,6 @@ module.exports = {
       "process.env.NODE_ENV": JSON.stringify("production"),
       "__DEV__": false
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]), // saves ~100k from build
     new webpack.ProgressPlugin(function(percentage, message) {
       process.stderr.write(message + "\r");
