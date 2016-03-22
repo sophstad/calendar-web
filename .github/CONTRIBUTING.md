@@ -66,10 +66,10 @@ Each commit message should include a **type**, a **scope** and a **subject**:
 Lines should not exceed 100 characters. This allows the message to be easier to read on github as well as in various git tools and produces a nice, neat commit log ie:
 
 ```
- #459  refactor(utils): create url mapper utility function
- #463  chore(webpack): update to isomorphic tools v2
- #494  fix(babel): correct dependencies and polyfills
- #510  feat(app): add react-bootstrap responsive navbar
+ #459  refactor(utils): Create url mapper utility function.
+ #463  chore(webpack): Update to isomorphic tools v2.
+ #494  fix(babel): Correct dependencies and polyfills.
+ #510  feat(app): Add react-bootstrap responsive navbar.
 ``` 
 
 #### Type
