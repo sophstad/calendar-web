@@ -39,9 +39,7 @@ module.exports = {
     filename: "[name].bundle.js",
     path: path.resolve("dist"),
     pathinfo: true,
-    publicPath: "/",
-    // sourceMapFilename must be named 'index' for sourcemapping to work. fucking stupid.
-    sourceMapFilename: "index.js.map"
+    publicPath: "/"
   },
   module: {
     loaders: [{
