@@ -1,6 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from 'assets/styles/counter'
+import styles from 'assets/styles/counter.styl'
 
 function Counter(props) {
   return (
@@ -8,11 +8,15 @@ function Counter(props) {
       <div className="section">
         <h3 className="section-heading">{ 'Counter' }</h3>
         <p className="section-description">
-          { 'Current value: '}
+          { 'Current value: ' }
           <span styleName="counter-value">{ props.value }</span>
         </p>
-        <button className="button button-primary" onClick={ props.handleIncrement }>{ 'Increment' }</button>
-        <button className="button" onClick={ props.handleDecrement }>{ 'Decrement' }</button>
+        <button className="button button-primary" onClick={ props.handleIncrement }>
+          { 'Increment' }
+        </button>
+        <button className="button" onClick={ props.handleDecrement }>
+          { 'Decrement' }
+        </button>
       </div>
     </div>
   )

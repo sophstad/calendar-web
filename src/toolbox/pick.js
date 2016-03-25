@@ -10,7 +10,8 @@ export default (keys, object) => keys.reduce(
 
 export function pickEasy(keys, object) {
   let result = {}
-  for (key in keys)
+  for (let key in keys) {
     result[key] = object[key]
+  }
   return result
 }

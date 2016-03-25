@@ -14,7 +14,6 @@ import Search from 'components/Search'
 /* Assets */
 // import MyAsset from 'assets/MyAsset'
 
-
 export default class Home extends React.Component {
   render() {
     return (

@@ -1,17 +1,39 @@
-import { createElement } from 'react'
-import { render } from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
+import configureStore from 'store/configureStore'
 
-import ROOT from 'containers/Root'
+const rootElement   = document.getElementById('root')
+const store         = configureStore(window.__INITIAL_STATE__)
+const history       = syncHistoryWithStore(browserHistory, store)
 
-if (__DEV__) {
-  try {
-    render(ROOT, document.getElementById('root'))
-  } catch (error) {
-    render(
-      createElement(require('redbox-react'), { error }),
-      document.getElementById('root')
+let render = () => {
+  const App = require('containers/Root').default
+  ReactDOM.render(<App store={ store } history={ history } />, rootElement)
+}
+
+if (module.hot) {
+  // Support hot reloading of components
+  // and display an overlay for runtime errors
+  const renderApp = render
+  const renderError = (error) => {
+    const RedBox = require('redbox-react')
+    ReactDOM.render(
+      <RedBox error={error} />,
+      rootElement
     )
   }
-} else {
-  render(ROOT, document.getElementById('root'))
+
+  render = () => {
+    try {
+      renderApp()
+    } catch (error) {
+      renderError(error)
+    }
+  }
+
+  module.hot.accept('containers/Root', render)
 }
+
+render()

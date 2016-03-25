@@ -1,7 +1,7 @@
 "use strict";
 
 var path = require("path");
-var assetsPath = path.resolve("assets");
+var assetsPath = path.resolve("src/assets");
 var srcPath = path.resolve("src");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -12,50 +12,28 @@ module.exports = {
   resolve: {
     alias: {
       "react": "react-lite",
-      "react-dom": "react-lite",
-      "assets": assetsPath
+      "react-dom": "react-lite"
+      // "assets": assetsPath
     },
-    root: srcPath,
-    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx", ".styl"]
+    root: srcPath
   },
-  entry: {
-    "commons": [
-      "babel-polyfill",
-      "isomorphic-fetch",
-      "jquery",
-      "moment",
-      "react-lite",
-      "react-redux",
-      "react-router",
-      "react-router-redux",
-      "redux",
-      "redux-actions",
-      "redux-promise",
-      "redux-thunk"
-    ],
-    "index": path.resolve(srcPath, "index")
-  },
+  entry: path.resolve(srcPath, "index"),
   output: {
     path: path.resolve("dist"),
-    publicPath: "/assets/",
-    filename: "[name]-[hash].js",
-    chunkFilename: "[id].js"
+    publicPath: "/",
+    filename: "[name]-[hash].bundle.js"
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js$/,
       include: srcPath,
       loader: "babel"
     }, {
       test: /\.css$/,
-      include: [
-        path.resolve(assetsPath, "css"),
-        path.resolve("node_modules")
-      ],
+      include: path.resolve(assetsPath, "css"),
       loader: ExtractTextPlugin.extract(
         "style",
-        "css",
-        "postcss"
+        "css!postcss"
       )
     }, {
       test: /\.styl$/,
@@ -90,33 +68,42 @@ module.exports = {
   // webpack plugins
   plugins: [
     new ExtractTextPlugin(
-      "css/[name]-[hash].css",
+      "[name]-[hash].css",
       { allChunks: true }
     ),
     new HtmlWebpackPlugin({
       favicon: path.resolve(assetsPath, "images/favicon.png"),
-      hash: true,
       template: path.resolve(assetsPath, "index.html")
     }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production"),
       "__DEV__": false
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]), // saves ~100k from build
-    new webpack.NoErrorsPlugin(),
-    new webpack.ProvidePlugin({
-      "$": "jquery",
-      "jQuery": "jquery",
-      "window.jQuery": "jquery",
-      "fetch": "isomorphic-fetch"
-    }),
     new webpack.ProgressPlugin(function(percentage, message) {
       process.stderr.write(message + "\r");
     }),
+    new webpack.ProvidePlugin({
+      "fetch": "isomorphic-fetch"
+    }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "commons",
-      filename: "[name]-[hash].js"
+      name: "vendor",
+      filename: "vendor-[hash].js",
+      chunks: [
+        "babel-polyfill",
+        "isomorphic-fetch",
+        "moment",
+        "react-lite",
+        "react-redux",
+        "react-router",
+        "react-router-redux",
+        "redux",
+        "redux-actions",
+        "redux-promise",
+        "redux-saga",
+        "redux-thunk",
+        "reselect"
+      ]
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

@@ -9,8 +9,9 @@ export default (...args) => args.reduce(
 
 export function merge(...args) {
   let result = {}
-  for (arg in args)
+  for (let arg in args) {
     Object.assign(result, arg)
+  }
   return result
 }
 
@@ -19,4 +20,4 @@ export function merge(...args) {
  * If an object contains an array of objects, flatten.
  * (obj1, obj2, obj3) -> {obj1content, obj2content, obj3content}
  */
-export const mergemerge = (...args) => args.map(arg => Array.isArray(arg) ? merge.apply(null, args) : merge(result, arg))
+// export const mergemerge = (...args) => args.map(arg => Array.isArray(arg) ? merge.apply(null, args) : merge(result, arg))

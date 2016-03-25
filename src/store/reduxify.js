@@ -1,63 +1,34 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import apply from 'toolbox/apply'
-import merge from 'toolbox/merge'
 
 /*
- * Reduxifies a container.
+ * Connects a react component to the redux store.
  *
- * @param selector   - The name of the desired substate, or a function describing
- *                     the selection logic. The selector selects what part of the
- *                     state is given to the container.
- * @param actionSets - An array of actionSets or an object of actionSets.
- *                     If the actionSets are contained in an array, the resulting
- *                     injected prop is a single aggregation of all the actions.
- *                     If the actionSets are contained in an object, multiple props
- *                     are injected, each corresponding to each actionSet.
- * @param actionSet  - A single actionSet object. The actionSet will be injected as
- *                     the 'actions' prop.
- * @param container  - The container to be connected.
+ * @param state      - The name of the desired substate.
+ * @param selector   - a memoized selector function describing selection logic. The selector
+ *                     efficiently computes derived data from the store.
+ * @param actions    - The actions that will be provided to the connected component.
+ *
  * @return           - If the container was specified, the connected container.
  *                     Otherwise, the enhancer function.
  */
-export default function reduxify({ selector, actionSet, actionSets, container }) {
-  if (actionSet && actionSets)
-    throw new Error("Reduxify use error - please only define <actionSet> or <actionSets>")
+export default function reduxify({ state, selector, actions }) {
 
-  // the container will subscribe to Redux store updates
-  if (selector)
-    var mapStateToProps = typeof selector === 'function' ?
-      selector
-    : (state) => ({ [selector]: state[selector] })
+  /* the container will subscribe to Redux store updates */
+  if (state)
+    var mapStateToProps = (STATE) => selector ?
+      { [state]: selector(STATE) }
+    : { [state]: STATE[state] }
 
-  // the container will be provided multiple actionSets
-  if (actionSets)
-    var mapDispatchToProps = Array.isArray(actionSets) ?
-    // Aggregates actionSets into a single 'actions' prop
-      (dispatch) => ({
-        actions: bindActionCreators(
-          merge.apply(null, actionSets),
-          dispatch
-        )
-      })
-    // Injects each actionSet as an individual prop of the container
-    : (dispatch) => apply(
-        actionSets,
-        (actionSet) => bindActionCreators(actionSet, dispatch)
-      )
-  // the container will be provided a single actionSet
-  if (actionSet)
+  /* the container will be provided actions */
+  if (actions)
     var mapDispatchToProps = (dispatch) => ({
-      actions: bindActionCreators(actionSet, dispatch)
+      actions: bindActionCreators(actions, dispatch)
     })
 
-  return container ?
-    connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )(container)
-  : connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+
 }

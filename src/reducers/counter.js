@@ -7,10 +7,10 @@ const initialState = {
 
 /* A regular reducer */
 export default createReducer(initialState, {
-  [INCREMENT_COUNTER]: (state, action) => (
+  [INCREMENT_COUNTER]: (state) => (
     state.update('value', value => value + 1)
   ),
-  [DECREMENT_COUNTER]: (state, action) => (
-    state.update('value', value => value - 1)
+  [DECREMENT_COUNTER]: (state) => (
+    state.update('value', (value) => value - 1)
   )
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 import Counter from 'components/Counter'
-import * as counterActions from 'actions/counterActions'
+import { increment, decrement } from 'actions/counter'
 import reduxify from 'store/reduxify'
 
 class CounterContainer extends React.Component {
@@ -17,7 +17,6 @@ class CounterContainer extends React.Component {
 }
 
 export default reduxify({
-  container: CounterContainer,
-  selector: 'counter',
-  actionSet: counterActions
-})
+  state: 'counter',
+  actions: { increment, decrement }
+})(CounterContainer)
