@@ -5,6 +5,7 @@ import reduxify from 'store/reduxify'
 
 class CounterContainer extends React.Component {
   render() {
+    console.log("counter")
     return (
       <Counter
         value={ this.props.counter.get('value') }

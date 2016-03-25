@@ -5,6 +5,8 @@ import React from 'react'
 import Counter from 'containers/Counter'
 import Toggler from 'containers/Toggler'
 import Header from 'components/Header'
+import Calendar from 'containers/Calendar'
+import Search from 'components/Search'
 
 /* Components */
 // import MyComponent from 'components/MyComponent'
@@ -18,6 +20,8 @@ export default class Home extends React.Component {
     return (
       <div>
         <Header />
+        <Search />
+        <Calendar />
         <Counter />
         <Toggler />
       </div>
