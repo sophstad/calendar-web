@@ -5,7 +5,7 @@
     <!-- Basic Page Needs
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <title>Calendar</title>
+    <title>Calendar - Development</title>
     <meta name="description" content="Events at CU">
     <meta name="author" content="Jonathan Sun">
 
@@ -23,15 +23,29 @@
     <!-- Primary Page Layout
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div id="root">
-      <div class="container">
-        <div class="row">
-          <div class="one-half column" style="margin-top: 25%">
-            <h4>notworking</h4>
-            <p>If you see this, React isn't working.</p>
+      <%= "\<% if (content) { %\>" %>
+        <div>
+          <%= "\<%- content %\>" %>
+        </div>
+      <%= "\<% } else { %\>" %>
+        <div class="container">
+          <div class="row">
+            <div class="one-half column" style="margin-top: 25%">
+              <h4>notworking</h4>
+              <p>If you see this, React isn't working.</p>
+            </div>
           </div>
         </div>
-      </div>
+      <%= "\<% } %\>" %>
     </div>
+
+    <!-- Initial Application State
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <%= "\<% if (initialState) { %\>" %>
+      <script>
+        window.__INITIAL_STATE__ = <%= "\<%- initialState %\>" %>
+      </script>
+    <%= "\<% } %\>" %>
 
   </body>
 </html>

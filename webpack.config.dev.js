@@ -1,7 +1,6 @@
 "use strict";
 
 var path = require("path");
-var assetsPath = path.resolve("src/assets");
 var srcPath = path.resolve("src");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var autoprefixer = require("autoprefixer");
@@ -16,32 +15,23 @@ module.exports = {
     contentBase: path.resolve("dist"),
     historyApiFallback: true,
     hot: true,
-    proxy: {
-      "/api/*": "http://localhost:5000"
-    },
-    stats: {
-      chunks: false
-    }
+    inline: true,
+    proxy: { "/api/*": "http://localhost:5000" },
+    stats: { chunks: false }
   },
   resolve: {
-    // for big apps, resolve the top level directories
-    // alias: {
-    //   "assets": assetsPath
-    // },
     root: srcPath
   },
   entry: [
     "babel-polyfill",
-    "webpack-hot-middleware/client",
-    path.resolve(srcPath, "index")
+    path.resolve(srcPath, "index"),
+    "webpack-hot-middleware/client"
   ],
   output: {
     filename: "[name].bundle.js",
     path: path.resolve("dist"),
     pathinfo: true,
-    publicPath: "/",
-    // sourceMapFilename must be named 'index' for sourcemapping to work. fucking stupid.
-    sourceMapFilename: "index.js.map"
+    publicPath: "/"
   },
   module: {
     loaders: [{
@@ -50,7 +40,7 @@ module.exports = {
       loader: "babel"
     }, {
       test: /\.css$/,
-      include: path.resolve(assetsPath, "css"),
+      include: path.resolve(srcPath, "assets/css"),
       loaders: [
         "style",
         "css",
@@ -58,28 +48,29 @@ module.exports = {
       ]
     }, {
       test: /\.styl$/,
-      include: path.resolve(assetsPath, "styles"),
+      include: path.resolve(srcPath, "assets/styles"),
       loaders: [
-        "style",
+        "style?sourceMap",
         "css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]",
         "postcss",
-        "stylus"
+        "stylus?sourceMap"
       ]
     }, {
       test: /\.json$/,
-      include: assetsPath,
+      include: path.resolve(srcPath, "assets"),
       loader: "json"
     }, {
       test: /\.(jpe?g|png|gif|svg)$/i,
-      include: assetsPath,
+      include: path.resolve(srcPath, "assets"),
       loader: "file"
     }]
   },
   postcss: [autoprefixer],
   plugins: [
     new HtmlWebpackPlugin({
-      favicon: path.resolve(assetsPath, "images/favicon.png"),
-      template: path.resolve(assetsPath, "index.html")
+      filename: "index.ejs",
+      favicon: path.resolve(srcPath, "assets/images/favicon.png"),
+      template: path.resolve(srcPath, "assets/template.dev.ejs")
     }),
     new webpack.DefinePlugin({
       "__DEV__": true
@@ -91,6 +82,7 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       "fetch": "isomorphic-fetch"
-    })
+    }),
+    new webpack.optimize.OccurenceOrderPlugin()
   ]
-}
+};

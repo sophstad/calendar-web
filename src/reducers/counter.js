@@ -1,5 +1,5 @@
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from 'actions/constants'
-import createReducer from 'store/createImmutableReducer'
+import createReducer from 'store/createReducer'
 
 const initialState = {
   value: 0

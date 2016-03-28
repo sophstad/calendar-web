@@ -3,6 +3,6 @@ import 'assets/css/normalize.css'
 import 'assets/css/skeleton.css'
 import 'assets/css/custom.css'
 
-module.exports = __DEV__ ?
-  require('./Root.dev')
-: require('./Root.prod')
+module.exports = process.env.NODE_ENV === 'production' ?
+  require('./Root.prod')
+: require('./Root.dev')
