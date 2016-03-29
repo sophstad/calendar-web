@@ -1,12 +1,11 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { Router } from 'react-router'
-import Routes from 'Routes'
+import { RouterContext } from 'react-router'
 
-export default function Root({ store, history }) {
+export default function Root({ store, ...renderProps }) {
   return (
     <Provider store={ store }>
-      <Router history={ history } routes={ Routes } />
+      <RouterContext { ...renderProps } />
     </Provider>
   )
 }

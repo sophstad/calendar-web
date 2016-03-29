@@ -1,20 +1,16 @@
 import React from 'react'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import configureStore from 'store/configureStore'
 import { renderToString } from 'react-dom/server'
-import { RouterContext } from 'react-router'
 import { fromJS } from 'immutable'
-import calendarApp from 'reducers'
+import App from 'containers/Root'
 
 export default function renderApp(renderProps) {
   // Create a new Redux store instance
-  const store = createStore(calendarApp)
+  const store = configureStore()
 
-  // Render the component to a string
+  // Render the application to a string
   const content = renderToString(
-    <Provider store={ store }>
-      <RouterContext {...renderProps} />
-    </Provider>
+    <App store={ store } { ...renderProps } />
   )
 
   // Grab the initial state from our Redux store
