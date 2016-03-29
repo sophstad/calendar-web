@@ -9,9 +9,11 @@ require('babel-register')
 const stylus = require('stylus')
 const autoprefixer = require('autoprefixer')
 require('css-modules-require-hook')({
-  devMode: false, // TODO
+  devMode: process.env.NODE_ENV === 'production', // TODO
   extensions: ['.styl'],
-  generateScopedName: '[name]__[local]___[hash:base64:5]',
+  generateScopedName: process.env.NODE_ENV === 'production' ?
+    '[name]__[local]___[hash:base64:5]'
+  : '[path]___[name]__[local]___[hash:base64:5]',
   prepend: [
     autoprefixer()
   ],
