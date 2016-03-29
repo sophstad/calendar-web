@@ -13,7 +13,7 @@ const webpackConfig = process.env.NODE_ENV === 'production' ?
 : require('../webpack.config.dev.js')
 
 const app = express()
-const port = 3000
+const port = process.env.NODE_ENV === 'production' ? process.env.PORT : 3000
 const compiler = webpack(webpackConfig)
 var getDocument
 
