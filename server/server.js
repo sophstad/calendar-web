@@ -5,7 +5,7 @@ import express from 'express'
 import ejs from 'ejs'
 import httpProxy from 'http-proxy'
 import { match } from 'react-router'
-import Routes from 'Routes'
+import Routes from 'routes'
 import renderApp from './renderApp'
 import webpack from 'webpack'
 const webpackConfig = process.env.NODE_ENV === 'production' ?

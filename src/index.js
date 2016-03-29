@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { match, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import routes from 'Routes'
+import routes from 'routes'
 import configureStore from 'store/configureStore'
 
 const rootElement   = document.getElementById('root')
