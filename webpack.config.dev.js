@@ -9,6 +9,8 @@ var webpack = require("webpack");
 module.exports = {
   debug: true,
   devtool: "#source-map",
+  // Not even used because we use webpack-dev-middleware,
+  // not webpack-dev-server.
   devServer: {
     // contentBase technically not needed...
     // b/c everything is served from mem
@@ -50,10 +52,10 @@ module.exports = {
       test: /\.styl$/,
       include: path.resolve(srcPath, "assets/styles"),
       loaders: [
-        "style?sourceMap",
+        "style",
         "css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]",
         "postcss",
-        "stylus?sourceMap"
+        "stylus"
       ]
     }, {
       test: /\.json$/,

@@ -10,7 +10,14 @@ cache:
 script:
   - npm run lint
   - npm run test
-  - npm run build
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: G9zTEzhCTNS6Zz5eKoRNB6tC26OGP+OAff8CVqY3ZYP6gsIdD49gb/IJdO7zdyOkV1/GOGzSgLMGuQu2uCm7Maw3jvI3BlzTCQgn/6wVEKUXiHgpfP2q1qVzKe9/pDXtfO8ahneC3QEeEZJsvqu72Q6IapcA1+psIseuYqp+BzWdJ5jQt7igEdc6JswVepiCk+6S1BAayUOUtw13bqIzEaGAMEJis0YxipXb8rJllcoaKd5rvS1vd+nocPCmUskwiJ11FVTYZRLGeXIDiH+57btPO+BgdiuRr+9/q/ASkE82eF9x9GwNdgRUpfErh9oLp1t07tYeVKIUHtT+yN00zIbVJhhCHwwH5Xc1b3Tm+6LvvOwiGGNmFkbnBchxgHGk4+6TWUa/32mqcOjKeCgMESIapi5DANvTrx6LnLIIpDTlzbuynWOjwmCCnmiS3j9vroKcky7g/XNsGXna4ehHFWU1W0flTrKf1xrN3stc/YUV+VESp/H3T7J09ZFzkowECR1YM5uKPSPBbTBhepkzezaRtPc/3xAJyHFZewk20W+KfisxDINkTBh2yah8ONMBxTdVxfEBqpMsQaxpefDdik9xqRrF0VwVJ9az6qId5+BfWDv/KkJx8PbY9Pltv8FZqOPqELlHg8SaJM2G3StR3Av1BSwGHd+yIhDBp0VKLIo=
+  app:
+    master: calendar-staging
+    production: calendar-production
 
 notifications:
   email: false

@@ -23,18 +23,20 @@
     <!-- Primary Page Layout
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div id="root">
-      <%= "\<% if (content) { -%\>" %>
-        <div><%= "\<%- content %\>" %></div>
-      <%= "\<% } -%\>" %>
+      <%= "\<% if (content) { %\>" %>
+        <div>
+          <%= "\<%- content %\>" %>
+        </div>
+      <%= "\<% } %\>" %>
     </div>
 
     <!-- Initial Application State
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <%= "\<% if (initialState) { %\>" %>
-    <script>
-      window.__INITIAL_STATE__ = <%= "\<%- initialState %\>" %>
-    </script>
-  <%= "\<% } %\>" %>
+    <%= "\<% if (initialState) { %\>" %>
+      <script>
+        window.__INITIAL_STATE__ = <%= "\<%- initialState %\>" %>
+      </script>
+    <%= "\<% } %\>" %>
 
   </body>
 </html>
