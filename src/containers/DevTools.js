@@ -12,10 +12,14 @@ const DevTools = createDevTools(
   // Monitors are individually adjustable with props.
   // Consult their repositories to learn about those props.
   // Here, we put LogMonitor inside a DockMonitor.
+  // In addition, we set the default position to the 'left.'
+  // This is a little hack for SSR. Without this, the dock will inline an empty
+  // left:; value into the html, resulting in an invalid checksum with react.
   <DockMonitor
     toggleVisibilityKey="ctrl-h"
     changePositionKey="ctrl-q"
     defaultIsVisible={ false }
+    defaultPosition="left"
   >
     <LogMonitor theme="tomorrow" />
   </DockMonitor>
