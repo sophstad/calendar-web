@@ -12,7 +12,7 @@ const history       = syncHistoryWithStore(browserHistory, store)
 let render = () => {
   const App = require('containers/Root').default
   match({ history, routes }, (error, redirectLocation, renderProps) => {
-    ReactDOM.render(<App store={ store } {...renderProps} />, rootElement)
+    ReactDOM.render(<App store={ store } { ...renderProps } />, rootElement)
   })
 }
 
@@ -23,7 +23,7 @@ if (module.hot) {
   const renderError = (error) => {
     const RedBox = require('redbox-react')
     ReactDOM.render(
-      <RedBox error={error} />,
+      <RedBox error={ error } />,
       rootElement
     )
   }
