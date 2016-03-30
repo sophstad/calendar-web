@@ -2,7 +2,9 @@
 require('app-module-path').addPath(require('path').resolve(__dirname, 'src'))
 
 // transform all imports with Babel
-// TODO: this is bad for production.
+// TODO: this is bad for production, but isn't our fault.
+//    Primary break is 'import' token not recognized. Will wait
+//    until node implements this.
 require('babel-register')
 
 // transform stylus imports with css-modules
