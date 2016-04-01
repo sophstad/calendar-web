@@ -22,16 +22,17 @@
 
     <!-- Primary Page Layout
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div id="root">
-      <div class="container">
-        <div class="row">
-          <div class="one-half column" style="margin-top: 25%">
-            <h4>notworking</h4>
-            <p>If you see this, React isn't working.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= "\<% if (content) { %\>" %>
+    <div id="root"><%= "\<%- content %\>" %></div>
+    <%= "\<% } %\>" %>
+
+    <!-- Initial Application State
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <%= "\<% if (initialState) { %\>" %>
+    <script>
+      window.__INITIAL_STATE__ = <%= "\<%- initialState %\>" %>
+    </script>
+    <%= "\<% } %\>" %>
 
   </body>
 </html>

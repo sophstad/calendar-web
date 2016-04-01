@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title>Calendar - Development</title>
+    <meta name="description" content="Events at CU">
+    <meta name="author" content="Jonathan Sun">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  </head>
+  <body>
+
+    <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <%= "\<% if (content) { %\>" %>
+    <div id="root"><%= "\<%- content %\>" %></div>
+    <%= "\<% } else { %\>" %>
+    <div class="container">
+      <div class="row">
+        <div class="one-half column" style="margin-top: 25%">
+          <h4>notworking</h4>
+          <p>If you can see this, React is not working right.</p>
+        </div>
+      </div>
+    </div>
+    <%= "\<% } %\>" %>
+
+    <!-- Initial Application State
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <%= "\<% if (initialState) { %\>" %>
+    <script>
+      window.__INITIAL_STATE__ = <%= "\<%- initialState %\>" %>
+    </script>
+    <%= "\<% } %\>" %>
+
+  </body>
+</html>

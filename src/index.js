@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { browserHistory } from 'react-router'
+import { match, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
+import routes from 'routes'
 import configureStore from 'store/configureStore'
 
 const rootElement   = document.getElementById('root')
@@ -10,7 +11,9 @@ const history       = syncHistoryWithStore(browserHistory, store)
 
 let render = () => {
   const App = require('containers/Root').default
-  ReactDOM.render(<App store={ store } history={ history } />, rootElement)
+  match({ history, routes }, (error, redirectLocation, renderProps) => {
+    ReactDOM.render(<App store={ store } { ...renderProps } />, rootElement)
+  })
 }
 
 if (module.hot) {
@@ -20,7 +23,7 @@ if (module.hot) {
   const renderError = (error) => {
     const RedBox = require('redbox-react')
     ReactDOM.render(
-      <RedBox error={error} />,
+      <RedBox error={ error } />,
       rootElement
     )
   }

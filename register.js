@@ -2,16 +2,20 @@
 require('app-module-path').addPath(require('path').resolve(__dirname, 'src'))
 
 // transform all imports with Babel
-// TODO: this is bad for production.
+// TODO: this is bad for production, but isn't our fault.
+//    Primary break is 'import' token not recognized. Will wait
+//    until node implements this.
 require('babel-register')
 
 // transform stylus imports with css-modules
 const stylus = require('stylus')
 const autoprefixer = require('autoprefixer')
 require('css-modules-require-hook')({
-  devMode: false, // TODO
+  devMode: process.env.NODE_ENV === 'production', // TODO
   extensions: ['.styl'],
-  generateScopedName: '[name]__[local]___[hash:base64:5]',
+  generateScopedName: process.env.NODE_ENV === 'production' ?
+    '[name]__[local]___[hash:base64:5]'
+  : '[path]___[name]__[local]___[hash:base64:5]',
   prepend: [
     autoprefixer()
   ],
