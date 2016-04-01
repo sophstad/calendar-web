@@ -23,8 +23,13 @@ var getDocument
  */
 if (process.env.NODE_ENV === 'production') {
   compiler.run((err, stats) => {
+    const jsonStats = stats.toJson()
     if (err)
       console.error(err)
+    if (jsonStats.errors.length > 0)
+      console.error(jsonStats.errors)
+    if (jsonStats.warnings.length > 0)
+      console.error(jsonStats.warnings)
 
     console.log(stats.toString({
       // output options

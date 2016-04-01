@@ -1,7 +1,6 @@
 import React from 'react'
 import configureStore from 'store/configureStore'
 import { renderToString } from 'react-dom/server'
-import { fromJS } from 'immutable'
 import App from 'containers/Root'
 
 export default function renderApp(renderProps) {
@@ -14,7 +13,7 @@ export default function renderApp(renderProps) {
   )
 
   // Grab the initial state from our Redux store
-  const initialState = JSON.stringify(fromJS(store.getState()).toJS())
+  const initialState = JSON.stringify(toJS(store.getState()))
 
   // Send the rendered page back to the client
   return {
@@ -22,3 +21,16 @@ export default function renderApp(renderProps) {
     initialState
   }
 }
+
+function toJS(js) {
+  for (let el in js) {
+    if (!isPlainObj(js[el]) && !Array.isArray(js[el]))
+      js[el] = js[el].toJS()
+  }
+  return js
+}
+
+function isPlainObj(value) {
+  return value && (value.constructor === Object || value.constructor === undefined);
+}
+
