@@ -1,8 +1,6 @@
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER'
 
-export const TOGGLE_TEXT = 'TOGGLE_TEXT'
-
 export const NEXT_MONTH = 'NEXT_MONTH'
 export const PREV_MONTH = 'PREV_MONTH'
 export const SELECT_DATE = 'SELECT_DATE'
