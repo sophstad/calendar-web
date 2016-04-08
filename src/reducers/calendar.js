@@ -9,9 +9,9 @@ const initialState = {
 /* A regular reducer */
 export default createReducer(initialState, {
   [NEXT_MONTH]: (state, action) => (
-    state.update('date', moment() => moment().add(1, 'months'))
+    state.update('date', date => date.add(1, 'months'))
   ),
   [PREV_MONTH]: (state, action) => (
-    state.update('date', moment() => moment().subtract(1, 'months'))
+    state.update('date', date => date.subtract(1, 'months'))
   )
 })
