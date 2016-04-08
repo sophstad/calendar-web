@@ -1,7 +1,42 @@
 /* Shared
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.button {
-  border-radius: 100px;
+.right {
+  float: right;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Adjust default text color for search bar placeholder */
+::-webkit-input-placeholder {
+   color: white;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: white;  
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: white;  
+}
+:-ms-input-placeholder {  
+   color: white;  
+}
+
+.tag {
+  background-color: #4A90E2;
+  border-radius: 40px;
+  color: #FFFFFF;
+  font-size: 80%;
+  padding: 0.5rem 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #4A4A4A;
 }
 
 /* Sections
@@ -101,7 +136,7 @@
     font-size: 2.6rem;
   }
   .section {
-    padding: 14rem 0 15rem;
+    padding: 4rem 0 6rem;
   }
   .hero {
     padding: 16rem 0 14rem;
@@ -128,7 +163,7 @@
 /* Bigger than 1000 */
 @media (min-width: 1000px) {
   .section {
-    padding: 20rem 0 19rem;
+    padding: 6rem 0 8rem;
   }
   .hero {
     padding: 22rem 0;

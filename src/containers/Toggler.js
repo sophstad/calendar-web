@@ -1,6 +1,6 @@
 import React from 'react'
 import Toggler from 'components/Toggler'
-import * as togglerActions from 'actions/toggler'
+import { toggle } from 'actions/toggler'
 import reduxify from 'store/reduxify'
 
 class TogglerContainer extends React.Component {
@@ -15,7 +15,6 @@ class TogglerContainer extends React.Component {
 }
 
 export default reduxify({
-  container: TogglerContainer,
-  selector: 'toggler',
-  actionSet: togglerActions
-})
+  state: 'toggler',
+  actions: { toggle }
+})(TogglerContainer)

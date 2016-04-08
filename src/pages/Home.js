@@ -4,9 +4,13 @@ import React from 'react'
 // import MyContainer from 'containers/MyContainer'
 import Counter from 'containers/Counter'
 import Toggler from 'containers/Toggler'
-import Header from 'components/Header'
 import Calendar from 'containers/Calendar'
+
+import Header from 'components/Header'
 import Search from 'components/Search'
+import Schedule from 'components/Schedule'
+import Card from 'components/Card'
+import Footer from 'components/Footer'
 
 /* Components */
 // import MyComponent from 'components/MyComponent'
@@ -20,9 +24,9 @@ export default class Home extends React.Component {
       <div>
         <Header />
         <Search />
-        <Calendar />
-        <Counter />
-        <Toggler />
+        <Schedule />
+        <Card />
+        <Footer />
       </div>
     )
   }

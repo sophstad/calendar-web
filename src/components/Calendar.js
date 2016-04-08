@@ -1,6 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from 'assets/styles/calendar'
+import styles from 'assets/styles/calendar.styl'
 
 function Calendar(props) {
   return (

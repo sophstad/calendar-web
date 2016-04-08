@@ -1,6 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from 'assets/styles/toggler'
+import styles from 'assets/styles/toggler.styl'
 
 function Toggler(props) {
   return (

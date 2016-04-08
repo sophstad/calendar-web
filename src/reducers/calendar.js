@@ -12,8 +12,6 @@ export default createReducer(initialState, {
     state.update('date', moment() => moment().add(1, 'months'))
   ),
   [PREV_MONTH]: (state, action) => (
-    state.update('month', moment() => moment.subtract(1, 'months'))
-  ),
-  [SELECT_DATE]: (state, action) => (
+    state.update('date', moment() => moment.subtract(1, 'months'))
   )
 })

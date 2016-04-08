@@ -1,0 +1,37 @@
+$green = #1CC563
+$blue = #4A90E2
+  
+.header
+  background no-repeat top center url(https://upload.wikimedia.org/wikipedia/commons/0/07/Low_Memorial_Library_Columbia_University_NYC_retouched.jpg)
+  background-size cover
+  color #FFFFFF
+  position relative
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    color white
+  
+  &:before 
+    content ''
+    position absolute
+    top 0
+    left 0
+    bottom 0
+    right 0
+    opacity 0.62
+    background-image linear-gradient(37deg, #CBCBCB 0%, #1F3C8A 74%)
+  
+.nav
+  display inline-block
+  padding-bottom 10rem
+  width 100%
+
+.location
+  padding-top 8rem
+  
+.blue
+  color $blue
