@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from 'assets/styles/header.styl'
 
-function Header(props) {
+function Header() {
   return (
     <div styleName="header">
       <div className="container">

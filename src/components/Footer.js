@@ -2,9 +2,9 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from 'assets/styles/footer.styl'
 
-function Footer(props) {
+function Footer() {
   return (
-    <div className="container">
+    <div className="container section">
       <div className="six columns">
         <p>
           Maintained by <a href="http://adicu.com">ADI Labs</a>

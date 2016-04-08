@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from 'assets/styles/schedule.styl'
 
-function Schedule(props) {
+function Schedule() {
   return (
     <div className="container">
       <div className="section six columns">
